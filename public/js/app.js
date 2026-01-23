@@ -13,6 +13,10 @@
 // ===================================
 
 document.addEventListener('DOMContentLoaded', function () {
+  // Initialize theme system first
+  initializeThemeSystem();
+  
+  // Then load navbar
   loadNavbar();
 });
 
@@ -86,17 +90,65 @@ function loadNavbar() {
   // Attach theme toggle event listener
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
-    themeToggle.addEventListener('click', initThemeFunctionality);
+    themeToggle.addEventListener('click', toggleTheme);
   }
 }
 
 /**
  * Initialize light/dark mode toggle functionality
- * (Called when theme button is clicked in COMMIT 2)
+ * Sets up theme on page load and attaches click handler
  */
-function initThemeFunctionality() {
-  console.log('Theme toggle button clicked - Functionality will be added in COMMIT 2');
-  // Placeholder for actual theme toggle logic (COMMIT 2)
+function initializeThemeSystem() {
+  // Get stored theme preference from LocalStorage (default to 'light')
+  const storedTheme = getFromLocalStorage('theme', 'light');
+  
+  // Apply the stored theme
+  applyTheme(storedTheme);
+  
+  // Update button icon
+  updateThemeToggleButton(storedTheme);
+}
+
+/**
+ * Apply theme to the document
+ * @param {string} theme - 'light' or 'dark'
+ */
+function applyTheme(theme) {
+  const htmlElement = document.documentElement;
+  
+  if (theme === 'dark') {
+    htmlElement.setAttribute('data-theme', 'dark');
+  } else {
+    htmlElement.removeAttribute('data-theme');
+  }
+  
+  // Save preference to LocalStorage
+  saveToLocalStorage('theme', theme);
+}
+
+/**
+ * Toggle between light and dark mode
+ */
+function toggleTheme() {
+  const htmlElement = document.documentElement;
+  const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  
+  applyTheme(newTheme);
+  updateThemeToggleButton(newTheme);
+}
+
+/**
+ * Update theme toggle button icon based on current theme
+ * @param {string} theme - 'light' or 'dark'
+ */
+function updateThemeToggleButton(theme) {
+  const themeToggle = document.getElementById('themeToggle');
+  
+  if (themeToggle) {
+    // Show sun icon in dark mode (to switch to light), moon in light mode (to switch to dark)
+    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
 }
 
 // ===================================
