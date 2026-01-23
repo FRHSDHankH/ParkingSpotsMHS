@@ -306,3 +306,480 @@ a:hover {
     transform: translateY(0);
   }
 }
+
+/* ===========================
+   HOMEPAGE STYLES
+   =========================== */
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(52, 152, 219, 0.05) 100%);
+  padding: 3rem 2rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--secondary-color);
+  animation: fadeIn 0.6s ease-out;
+}
+
+.hero-section h1 {
+  color: var(--text-dark);
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-section .lead {
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hero-section .fs-5 {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+}
+
+/* How It Works Section */
+.how-it-works-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.how-it-works-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+  border-radius: 2px;
+}
+
+.step-card {
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: var(--secondary-color);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+.step-card h5 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.step-card p {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  opacity: 0.9;
+  margin-bottom: 0;
+}
+
+/* Rules Section */
+.rules-section {
+  background-color: var(--card-bg);
+}
+
+.rules-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.rules-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--danger-color), var(--warning-color));
+  border-radius: 2px;
+}
+
+.rules-section .card {
+  border-left: 4px solid var(--secondary-color);
+  transition: all 0.3s ease;
+}
+
+.rules-section .card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+  border-left-color: var(--secondary-color);
+}
+
+.rules-section h5 {
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.rules-section li {
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Shared Spots Section */
+.shared-spots-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.shared-spots-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #9b59b6, var(--secondary-color));
+  border-radius: 2px;
+}
+
+.shared-spots-section .card {
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.shared-spots-section .card:hover {
+  border-color: var(--secondary-color);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.shared-spots-section .border-info {
+  border-left: 4px solid var(--secondary-color) !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+}
+
+/* Timeline Section */
+.timeline-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.timeline-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--warning-color), var(--danger-color));
+  border-radius: 2px;
+}
+
+.timeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 25px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--secondary-color), var(--success-color));
+  border-radius: 2px;
+}
+
+.timeline-item {
+  display: flex;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.timeline-marker {
+  font-size: 1.5rem;
+  margin-right: 2rem;
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+  width: 50px;
+  text-align: center;
+}
+
+.timeline-content {
+  flex: 1;
+  padding: 1.5rem;
+  background-color: rgba(52, 152, 219, 0.05);
+  border-left: 3px solid var(--secondary-color);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+  transform: translateX(5px);
+}
+
+.timeline-content h6 {
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.timeline-content p {
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+/* FAQ Section */
+.faq-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.faq-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #f39c12, #e74c3c);
+  border-radius: 2px;
+}
+
+.accordion-button {
+  color: var(--text-dark);
+  font-weight: 600;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.accordion-button:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+}
+
+.accordion-body {
+  background-color: rgba(52, 152, 219, 0.05);
+  color: var(--text-dark);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Contact Section */
+.contact-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.contact-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #27ae60, var(--secondary-color));
+  border-radius: 2px;
+}
+
+.contact-section .card {
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.contact-section .card:hover {
+  border-color: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.contact-section a {
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-section a:hover {
+  color: #2980b9;
+}
+
+/* CTA Section */
+.cta-section .card {
+  border: 2px solid var(--secondary-color);
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(52, 152, 219, 0.02) 100%);
+  transition: all 0.3s ease;
+}
+
+.cta-section .card:hover {
+  border-color: #2980b9;
+  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.2);
+  transform: translateY(-3px);
+}
+
+.cta-section .fs-5 {
+  color: var(--text-dark);
+}
+
+/* Footer */
+footer {
+  background-color: var(--navbar-bg) !important;
+  border-top: 2px solid var(--secondary-color);
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+footer p {
+  margin: 0;
+  color: var(--text-light);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .hero-section .lead {
+    font-size: 1.1rem;
+  }
+
+  .step-card {
+    margin-bottom: 1rem;
+  }
+
+  .rules-section h2,
+  .shared-spots-section h2,
+  .timeline-section h2,
+  .faq-section h2,
+  .contact-section h2,
+  .how-it-works-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline-marker {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    width: 40px;
+  }
+
+  .timeline-content {
+    padding: 1rem;
+  }
+
+  .timeline-content h6 {
+    font-size: 0.95rem;
+  }
+
+  .accordion-button {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 2rem 1rem;
+  }
+
+  .hero-section h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-section .lead {
+    font-size: 1rem;
+  }
+
+  .hero-section .fs-5 {
+    font-size: 0.9rem !important;
+  }
+
+  .d-flex.gap-2.justify-content-center {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+
+  .rules-section h2,
+  .shared-spots-section h2,
+  .timeline-section h2,
+  .faq-section h2,
+  .contact-section h2,
+  .how-it-works-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .timeline {
+    padding-left: 20px;
+  }
+
+  .timeline::before {
+    left: 15px;
+  }
+}
