@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Parking Spot</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/parking.css" />
+</head>
+<body>
+  <!-- ========================================
+       NAVBAR (will be injected via JavaScript)
+       ======================================== -->
+  <div id="navbar-container"></div>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main class="container-fluid">
+    <div class="container mt-5">
+      <h1 class="text-center mb-4">Select Your Parking Spot</h1>
+
+      <!-- Parking Lot Selector -->
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-primary lot-btn" data-lot="A">
+              Parking Lot A
+            </button>
+            <button type="button" class="btn btn-outline-primary lot-btn" data-lot="B">
+              Parking Lot B
+            </button>
+            <button type="button" class="btn btn-outline-primary lot-btn" data-lot="C">
+              Parking Lot C
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Lot Display -->
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          <h2 id="currentLot">Parking Lot A</h2>
+          <p class="text-muted">Click on an available spot (green) to select it</p>
+        </div>
+      </div>
+
+      <!-- Parking Lot Grid -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div id="parkingLotContainer" class="parking-lot-container">
+            <!-- Parking spots will be dynamically generated here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Selected Spot Summary -->
+      <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+          <div class="card" id="selectedSpotCard" style="display: none">
+            <div class="card-header">
+              <h5 class="mb-0">✓ Selected Spot</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-2">
+                <strong>Lot:</strong> <span id="selectedLot">-</span>
+              </p>
+              <p class="mb-3">
+                <strong>Spot Number:</strong> <span id="selectedSpot">-</span>
+              </p>
+              <a href="form.html" class="btn btn-primary w-100">
+                Continue to Form
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back Button -->
+      <div class="row mb-5">
+        <div class="col-12 text-center">
+          <a href="index.html" class="btn btn-outline-secondary">
+            ← Back to Home
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- Custom App JS -->
+  <script src="js/app.js"></script>
+  <script src="js/parking.js"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+/* ===========================
+   PARKING LOT PAGE STYLES
+   =========================== */
+
+.parking-lot-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+/* ===========================
+   PARKING SPOT STYLES
+   =========================== */
+
+.parking-spot {
+  aspect-ratio: 1;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  display: flex;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--card-bg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Available Spot (Green) */
+.parking-spot.available {
+  border-color: var(--success-color);
+  background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(39, 174, 96, 0.05) 100%);
+}
+
+.parking-spot.available:hover {
+  background: linear-gradient(135deg, rgba(39, 174, 96, 0.2) 0%, rgba(39, 174, 96, 0.1) 100%);
+  border-color: var(--success-color);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+  transform: scale(1.05);
+}
+
+.parking-spot.available:active {
+  transform: scale(0.98);
+}
+
+/* Taken Spot (Red) */
+.parking-spot.taken {
+  border-color: var(--danger-color);
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.parking-spot.taken:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Selected Spot (Blue Highlight) */
+.parking-spot.selected {
+  border-color: var(--secondary-color);
+  border-width: 3px;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.2) 0%, rgba(52, 152, 219, 0.1) 100%);
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+}
+
+/* ===========================
+   SPOT HALF STYLES (Two halves per spot)
+   =========================== */
+
+.spot-half {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.spot-half:last-child {
+  border-right: none;
+}
+
+.parking-spot.available .spot-half:hover {
+  background-color: rgba(39, 174, 96, 0.2);
+}
+
+.spot-half-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--text-dark);
+}
+
+.spot-number {
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  opacity: 0.7;
+}
+
+.spot-day {
+  font-size: 0.75rem;
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+/* ===========================
+   LOT SELECTOR BUTTONS
+   =========================== */
+
+.lot-btn {
+  font-weight: 600;
+  border: 2px solid var(--secondary-color);
+  padding: 0.6rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.lot-btn.active {
+  background-color: var(--secondary-color);
+  color: white;
+  border-color: var(--secondary-color);
+}
+
+.lot-btn:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  border-color: var(--secondary-color);
+}
+
+/* ===========================
+   SELECTED SPOT CARD
+   =========================== */
+
+#selectedSpotCard {
+  border-left: 4px solid var(--success-color);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 768px) {
+  .parking-lot-container {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .parking-spot {
+    min-height: 80px;
+  }
+
+  .spot-half-content {
+    gap: 2px;
+  }
+
+  .spot-day {
+    font-size: 0.65rem;
+  }
+
+  .lot-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .parking-lot-container {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .parking-spot {
+    min-height: 70px;
+  }
+
+  .lot-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}

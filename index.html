@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marlboro High School Parking - Home</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ========================================
+       NAVBAR (will be injected via JavaScript)
+       ======================================== -->
+  <div id="navbar-container"></div>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main class="container-fluid">
+    <div class="container">
+      <!-- Hero Section -->
+      <section class="hero mt-5 mb-5 text-center">
+        <h1 class="display-4 fw-bold mb-3">🅿️ Marlboro High School Parking</h1>
+        <p class="lead">
+          Welcome to the Senior Parking Selection System
+        </p>
+        <p class="text-muted">
+          A simple and fair way for rising seniors to claim their parking spots
+        </p>
+      </section>
+
+      <!-- Info Cards -->
+      <section class="info-section mt-5">
+        <div class="row g-4">
+          <!-- Card 1: Overview -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-header">
+                <h5 class="mb-0">📍 How It Works</h5>
+              </div>
+              <div class="card-body">
+                <p>
+                  Select your parking spot from our interactive lot map. Each spot can be shared between two students. Once you've selected your spot and filled out the form, you'll receive a confirmation.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Rules -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-header">
+                <h5 class="mb-0">📋 Rules & Guidelines</h5>
+              </div>
+              <div class="card-body">
+                <ul class="list-unstyled">
+                  <li>✓ Seniors only</li>
+                  <li>✓ One spot per person (shared with partner)</li>
+                  <li>✓ First-come, first-served basis</li>
+                  <li>✓ Valid school ID required</li>
+                  <li>✓ Must follow all school parking policies</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Shared Spots -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-header">
+                <h5 class="mb-0">👥 Shared Parking Spots</h5>
+              </div>
+              <div class="card-body">
+                <p>
+                  Each parking spot is designed for two students to share. You and your partner can alternate days or arrange your own schedule. Partner information must be provided in the form.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Timeline -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-header">
+                <h5 class="mb-0">⏰ Timeline</h5>
+              </div>
+              <div class="card-body">
+                <ol class="list-unstyled">
+                  <li><strong>Step 1:</strong> Select your spot</li>
+                  <li><strong>Step 2:</strong> Fill out the form</li>
+                  <li><strong>Step 3:</strong> Get confirmation</li>
+                  <li><strong>Step 4:</strong> You're all set!</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Getting Started -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-header">
+                <h5 class="mb-0">🚀 Getting Started</h5>
+              </div>
+              <div class="card-body">
+                <p>
+                  Ready to reserve your spot? Click the button below to get started!
+                </p>
+                <a href="parking.html" class="btn btn-primary w-100">
+                  Select Parking Spot
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Questions -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+              <div class="card-header">
+                <h5 class="mb-0">❓ Questions?</h5>
+              </div>
+              <div class="card-body">
+                <p>
+                  Contact your parking committee or administration for more information about the senior parking program.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section mt-5 mb-5 text-center">
+        <div class="card">
+          <div class="card-body p-5">
+            <h2 class="mb-3">Ready to Reserve Your Spot?</h2>
+            <p class="lead mb-4">
+              Click below to start the parking selection process
+            </p>
+            <a href="parking.html" class="btn btn-primary btn-lg me-2">
+              Select Spot Now
+            </a>
+            <a href="admin.html" class="btn btn-outline-primary btn-lg">
+              Admin Dashboard
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <p class="mb-0">
+      &copy; 2024-2025 Marlboro High School Senior Parking System. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- Custom App JS -->
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+/* ===========================
+   ADMIN DASHBOARD STYLES
+   =========================== */
+
+/* ===========================
+   LOGIN SCREEN
+   =========================== */
+
+#loginScreen {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+#loginForm .form-control {
+  border-radius: 5px;
+  padding: 0.7rem;
+}
+
+#loginForm .btn {
+  padding: 0.7rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+/* ===========================
+   ADMIN DASHBOARD HEADER
+   =========================== */
+
+#adminDashboard h1 {
+  border-bottom: 3px solid var(--secondary-color);
+  padding-bottom: 0.5rem;
+}
+
+/* ===========================
+   STATS CARDS
+   =========================== */
+
+.card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.card.text-center h2 {
+  color: var(--secondary-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.card.text-center .card-title {
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+/* ===========================
+   CONTROL BUTTONS
+   =========================== */
+
+.btn-warning, .btn-info {
+  font-weight: 600;
+  border-radius: 5px;
+  margin-right: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-warning:hover, .btn-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-danger {
+  font-weight: 600;
+}
+
+/* ===========================
+   DATA TABLE
+   =========================== */
+
+#dataTable {
+  font-size: 0.95rem;
+}
+
+#dataTable thead {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+#dataTable thead th {
+  font-weight: 600;
+  border: none;
+  padding: 1rem 0.8rem;
+}
+
+#dataTable tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+#dataTable tbody tr:hover {
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+#dataTable tbody td {
+  vertical-align: middle;
+  padding: 0.8rem;
+}
+
+/* ===========================
+   ACTION BUTTONS IN TABLE
+   =========================== */
+
+.table-action-btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  margin-right: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.btn-sm {
+  font-weight: 600;
+}
+
+.btn-copy {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+}
+
+.btn-copy:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+.btn-remove {
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+}
+
+.btn-remove:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+/* ===========================
+   SEARCH INPUT
+   =========================== */
+
+#searchInput {
+  border: 2px solid var(--border-color);
+  border-radius: 5px;
+  padding: 0.6rem;
+}
+
+#searchInput:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 768px) {
+  .card.text-center h2 {
+    font-size: 1.8rem;
+  }
+
+  #dataTable {
+    font-size: 0.85rem;
+  }
+
+  #dataTable thead th {
+    padding: 0.7rem 0.5rem;
+  }
+
+  #dataTable tbody td {
+    padding: 0.6rem 0.4rem;
+  }
+
+  .table-action-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  #searchInput {
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .row.mb-4.g-3 > .col-md-3 {
+    margin-bottom: 1rem;
+  }
+
+  #loginScreen {
+    padding: 1rem;
+  }
+
+  #adminDashboard {
+    padding: 0.5rem;
+  }
+
+  #adminDashboard h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ===========================
+   PRINT STYLES
+   =========================== */
+
+@media print {
+  nav, #logoutBtn, .btn, #searchInput {
+    display: none !important;
+  }
+
+  #dataTable {
+    font-size: 0.8rem;
+  }
+}

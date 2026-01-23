@@ -1,0 +1,704 @@
+{
+  "parkingLots": {
+    "A": {
+      "name": "Lot A",
+      "totalSpots": 24,
+      "spots": [
+        {
+          "id": "A-1",
+          "lot": "A",
+          "number": 1,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-2",
+          "lot": "A",
+          "number": 2,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-3",
+          "lot": "A",
+          "number": 3,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-4",
+          "lot": "A",
+          "number": 4,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-5",
+          "lot": "A",
+          "number": 5,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-6",
+          "lot": "A",
+          "number": 6,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-7",
+          "lot": "A",
+          "number": 7,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-8",
+          "lot": "A",
+          "number": 8,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-9",
+          "lot": "A",
+          "number": 9,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-10",
+          "lot": "A",
+          "number": 10,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-11",
+          "lot": "A",
+          "number": 11,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-12",
+          "lot": "A",
+          "number": 12,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-13",
+          "lot": "A",
+          "number": 13,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-14",
+          "lot": "A",
+          "number": 14,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-15",
+          "lot": "A",
+          "number": 15,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-16",
+          "lot": "A",
+          "number": 16,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-17",
+          "lot": "A",
+          "number": 17,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-18",
+          "lot": "A",
+          "number": 18,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-19",
+          "lot": "A",
+          "number": 19,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-20",
+          "lot": "A",
+          "number": 20,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-21",
+          "lot": "A",
+          "number": 21,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-22",
+          "lot": "A",
+          "number": 22,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-23",
+          "lot": "A",
+          "number": 23,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "A-24",
+          "lot": "A",
+          "number": 24,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        }
+      ]
+    },
+    "B": {
+      "name": "Lot B",
+      "totalSpots": 24,
+      "spots": [
+        {
+          "id": "B-1",
+          "lot": "B",
+          "number": 1,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-2",
+          "lot": "B",
+          "number": 2,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-3",
+          "lot": "B",
+          "number": 3,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-4",
+          "lot": "B",
+          "number": 4,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-5",
+          "lot": "B",
+          "number": 5,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-6",
+          "lot": "B",
+          "number": 6,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-7",
+          "lot": "B",
+          "number": 7,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-8",
+          "lot": "B",
+          "number": 8,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-9",
+          "lot": "B",
+          "number": 9,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-10",
+          "lot": "B",
+          "number": 10,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-11",
+          "lot": "B",
+          "number": 11,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-12",
+          "lot": "B",
+          "number": 12,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-13",
+          "lot": "B",
+          "number": 13,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-14",
+          "lot": "B",
+          "number": 14,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-15",
+          "lot": "B",
+          "number": 15,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-16",
+          "lot": "B",
+          "number": 16,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-17",
+          "lot": "B",
+          "number": 17,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-18",
+          "lot": "B",
+          "number": 18,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-19",
+          "lot": "B",
+          "number": 19,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-20",
+          "lot": "B",
+          "number": 20,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-21",
+          "lot": "B",
+          "number": 21,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-22",
+          "lot": "B",
+          "number": 22,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-23",
+          "lot": "B",
+          "number": 23,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "B-24",
+          "lot": "B",
+          "number": 24,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        }
+      ]
+    },
+    "C": {
+      "name": "Lot C",
+      "totalSpots": 20,
+      "spots": [
+        {
+          "id": "C-1",
+          "lot": "C",
+          "number": 1,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-2",
+          "lot": "C",
+          "number": 2,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-3",
+          "lot": "C",
+          "number": 3,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-4",
+          "lot": "C",
+          "number": 4,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-5",
+          "lot": "C",
+          "number": 5,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-6",
+          "lot": "C",
+          "number": 6,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-7",
+          "lot": "C",
+          "number": 7,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-8",
+          "lot": "C",
+          "number": 8,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-9",
+          "lot": "C",
+          "number": 9,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-10",
+          "lot": "C",
+          "number": 10,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-11",
+          "lot": "C",
+          "number": 11,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-12",
+          "lot": "C",
+          "number": 12,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-13",
+          "lot": "C",
+          "number": 13,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-14",
+          "lot": "C",
+          "number": 14,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-15",
+          "lot": "C",
+          "number": 15,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-16",
+          "lot": "C",
+          "number": 16,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-17",
+          "lot": "C",
+          "number": 17,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-18",
+          "lot": "C",
+          "number": 18,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-19",
+          "lot": "C",
+          "number": 19,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        },
+        {
+          "id": "C-20",
+          "lot": "C",
+          "number": 20,
+          "taken": false,
+          "student": null,
+          "partner": null,
+          "email": null,
+          "reservedDate": null
+        }
+      ]
+    }
+  },
+  "adminPassword": "admin123",
+  "lastUpdated": "2024-01-23T00:00:00Z"
+}

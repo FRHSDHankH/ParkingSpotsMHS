@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmation</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ========================================
+       NAVBAR (will be injected via JavaScript)
+       ======================================== -->
+  <div id="navbar-container"></div>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main class="container-fluid">
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <!-- Success Message -->
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">✓ Submission Successful!</h4>
+            <p class="mb-0">
+              Your parking spot has been reserved. Please review the details below.
+            </p>
+          </div>
+
+          <!-- Confirmation Card -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0">📍 Assigned Parking Spot</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <p class="mb-2">
+                    <strong>Parking Lot:</strong>
+                  </p>
+                  <h3 class="text-primary mb-3">
+                    <span id="confirmLot">-</span>
+                  </h3>
+                </div>
+                <div class="col-md-6">
+                  <p class="mb-2">
+                    <strong>Spot Number:</strong>
+                  </p>
+                  <h3 class="text-primary mb-3">
+                    <span id="confirmSpot">-</span>
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Student Info Card -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0">👤 Your Information</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <p class="text-muted mb-1">Name</p>
+                  <p id="confirmName" class="fw-bold">-</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <p class="text-muted mb-1">Student ID</p>
+                  <p id="confirmStudentId" class="fw-bold">-</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <p class="text-muted mb-1">Email</p>
+                  <p id="confirmEmail" class="fw-bold">-</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <p class="text-muted mb-1">Phone (if provided)</p>
+                  <p id="confirmPhone" class="fw-bold">-</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Partner Info Card -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0">👥 Partner Information</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <p class="text-muted mb-1">Partner Name</p>
+                  <p id="confirmPartnerName" class="fw-bold">-</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <p class="text-muted mb-1">Partner Student ID</p>
+                  <p id="confirmPartnerStudentId" class="fw-bold">-</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Next Steps Card -->
+          <div class="card mb-4 border-success">
+            <div class="card-header bg-success text-white">
+              <h5 class="mb-0">📋 Next Steps</h5>
+            </div>
+            <div class="card-body">
+              <ol class="mb-0">
+                <li>Check your email for a confirmation message</li>
+                <li>Save this confirmation page for your records</li>
+                <li>Share parking spot details with your partner</li>
+                <li>Coordinate your parking schedule with your partner</li>
+                <li>Display your parking permit on your vehicle at all times</li>
+                <li>Follow all school parking policies and regulations</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Important Notes -->
+          <div class="alert alert-info" role="alert">
+            <h5 class="alert-heading">ℹ️ Important</h5>
+            <ul class="mb-0">
+              <li>This spot is valid for the 2024-2025 school year</li>
+              <li>You must have a valid parking permit on your vehicle</li>
+              <li>Parking is subject to all school policies and local regulations</li>
+              <li>Any violations may result in revocation of parking privileges</li>
+            </ul>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="d-grid gap-2 d-sm-flex">
+            <button class="btn btn-primary btn-lg" onclick="window.print()">
+              🖨️ Print Confirmation
+            </button>
+            <a href="index.html" class="btn btn-outline-secondary btn-lg">
+              Back to Home
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- Custom App JS -->
+  <script src="js/app.js"></script>
+  <script src="js/confirmation.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Information Form</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ========================================
+       NAVBAR (will be injected via JavaScript)
+       ======================================== -->
+  <div id="navbar-container"></div>
+
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main class="container-fluid">
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h1 class="text-center mb-4">Student Information Form</h1>
+
+          <!-- Form Card -->
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Enter Your Details</h5>
+            </div>
+            <div class="card-body">
+              <form id="studentForm">
+                <!-- Name Field -->
+                <div class="mb-3">
+                  <label for="fullName" class="form-label">Full Name *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    placeholder="John Doe"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please provide your full name.
+                  </div>
+                </div>
+
+                <!-- Student ID Field -->
+                <div class="mb-3">
+                  <label for="studentId" class="form-label">Student ID *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="studentId"
+                    placeholder="123456"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please provide your student ID.
+                  </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email Address *</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="student@school.edu"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please provide a valid email address.
+                  </div>
+                </div>
+
+                <!-- Partner Name Field -->
+                <div class="mb-3">
+                  <label for="partnerName" class="form-label">Partner Name *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="partnerName"
+                    placeholder="Partner Full Name"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please provide your partner's name.
+                  </div>
+                </div>
+
+                <!-- Partner ID Field -->
+                <div class="mb-3">
+                  <label for="partnerId" class="form-label">Partner Student ID *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="partnerId"
+                    placeholder="654321"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please provide your partner's student ID.
+                  </div>
+                </div>
+
+                <!-- Selected Spot Display -->
+                <div class="mb-3 p-3 border rounded" style="background-color: rgba(52, 152, 219, 0.1)">
+                  <h6 class="mb-2">Selected Parking Spot:</h6>
+                  <p class="mb-0">
+                    <strong>
+                      <span id="selectedLotDisplay">-</span> | Spot <span id="selectedSpotDisplay">-</span>
+                    </strong>
+                  </p>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="d-grid gap-2 d-sm-flex">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    Submit Form
+                  </button>
+                  <a href="parking.html" class="btn btn-outline-secondary btn-lg">
+                    Back to Parking
+                  </a>
+                </div>
+
+                <p class="text-muted text-center mt-3 mb-0">
+                  * All fields are required
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- Custom App JS -->
+  <script src="js/app.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>
