@@ -239,6 +239,10 @@ function selectSpot(spotId, spotData) {
   document.getElementById('selectedSpot').textContent = spotId;
   spotCard.style.display = 'block';
 
+  // Save selected spot to localStorage for use in form
+  saveToLocalStorage('selectedLot', parkingData[currentSelectedLot].name);
+  saveToLocalStorage('selectedSpot', spotId);
+
   // Save selection to LocalStorage
   saveSelectedParking(currentSelectedLot, spotId);
 
