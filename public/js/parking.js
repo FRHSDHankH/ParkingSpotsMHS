@@ -112,8 +112,13 @@ function initializeParkingPage() {
     });
   });
 
-  // Load first lot by default
-  switchLot('A');
+  // Try to load previous selection, otherwise default to Lot A
+  const previousSelection = getFromLocalStorage('selectedParking', null);
+  if (previousSelection) {
+    loadSelectedParking();
+  } else {
+    switchLot('A');
+  }
 }
 
 /**
@@ -234,8 +239,50 @@ function selectSpot(spotId, spotData) {
   document.getElementById('selectedSpot').textContent = spotId;
   spotCard.style.display = 'block';
 
+  // Save selection to LocalStorage
+  saveSelectedParking(currentSelectedLot, spotId);
+
   // Scroll to selection card
   spotCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+/**
+ * Save selected parking spot to LocalStorage
+ * @param {string} lot - Parking lot (A, B, C)
+ * @param {string} spotId - Spot ID (e.g., 'A1')
+ */
+function saveSelectedParking(lot, spotId) {
+  const selectedParking = {
+    lot: lot,
+    spotId: spotId,
+    timestamp: new Date().toISOString()
+  };
+  saveToLocalStorage('selectedParking', selectedParking);
+  console.log('✓ Parking selection saved:', selectedParking);
+}
+
+/**
+ * Load selected parking from LocalStorage if exists
+ */
+function loadSelectedParking() {
+  const selectedParking = getFromLocalStorage('selectedParking', null);
+  if (selectedParking) {
+    console.log('✓ Loaded previous parking selection:', selectedParking);
+    // Switch to the previously selected lot
+    switchLot(selectedParking.lot);
+    // Restore the spot selection after a short delay to ensure DOM is ready
+    setTimeout(() => {
+      const spotElement = document.querySelector(`[data-spot-id="${selectedParking.spotId}"]`);
+      if (spotElement && spotElement.classList.contains('available')) {
+        spotElement.classList.add('selected');
+        currentSelectedSpot = selectedParking.spotId;
+        const spotCard = document.getElementById('selectedSpotCard');
+        document.getElementById('selectedLot').textContent = parkingData[selectedParking.lot].name;
+        document.getElementById('selectedSpot').textContent = selectedParking.spotId;
+        spotCard.style.display = 'block';
+      }
+    }, 100);
+  }
 }
 
 console.log('✓ parking.js loaded successfully');
