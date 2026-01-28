@@ -256,6 +256,11 @@ function selectSpot(spotId, spotData) {
  * @param {string} spotId - Spot ID (e.g., 'A1')
  */
 function saveSelectedParking(lot, spotId) {
+  // Save individual keys for form access
+  saveToLocalStorage('selectedLot', lot);
+  saveToLocalStorage('selectedSpot', spotId);
+  
+  // Also save combined object for reference
   const selectedParking = {
     lot: lot,
     spotId: spotId,
