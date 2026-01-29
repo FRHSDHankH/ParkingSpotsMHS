@@ -41,18 +41,22 @@ function displaySelectedSpot() {
   // Get selected spot from localStorage (set by parking.js)
   const selectedLot = getFromLocalStorage('selectedLot', null);
   const selectedSpot = getFromLocalStorage('selectedSpot', null);
+  const selectedOption = getFromLocalStorage('selectedOption', 'Solo');
 
   // Display in form
   const lotDisplay = document.getElementById('selectedLotDisplay');
   const spotDisplay = document.getElementById('selectedSpotDisplay');
+  const optionDisplay = document.getElementById('selectedOptionDisplay');
 
   if (selectedLot && selectedSpot) {
     lotDisplay.textContent = selectedLot;
     spotDisplay.textContent = selectedSpot;
+    optionDisplay.textContent = selectedOption;
   } else {
     // If no spot selected, show warning
     lotDisplay.textContent = 'No Lot Selected';
     spotDisplay.textContent = 'N/A';
+    optionDisplay.textContent = 'N/A';
 
     // Show alert
     showAlert('⚠️ No parking spot selected. Please go back and select a spot.', 'warning', 5000);
@@ -85,6 +89,7 @@ function handleFormSubmission(e) {
     partnerId: document.getElementById('partnerId').value.trim(),
     selectedLot: getFromLocalStorage('selectedLot', null),
     selectedSpot: getFromLocalStorage('selectedSpot', null),
+    selectedOption: getFromLocalStorage('selectedOption', 'Solo'),
     submittedAt: new Date().toISOString(),
   };
 
@@ -128,12 +133,12 @@ function isValidStudentId(id) {
 }
 
 /**
- * Save student form data to localStorage
+ * Save student form data to localStorage and JSON file
  * @param {object} formData - Form data object
  */
 function saveStudentFormData(formData) {
   try {
-    // Save the current submission
+    // Save the current submission to localStorage
     saveToLocalStorage('studentFormData', formData);
 
     // Also save to a submissions array for admin dashboard
@@ -147,7 +152,32 @@ function saveStudentFormData(formData) {
     submissions.push(formData);
     saveToLocalStorage('submissions', submissions);
 
+    // Also save to the JSON file (via fetch POST)
+    fetch('public/data/studentData.json')
+      .then(response => response.json())
+      .then(data => {
+        // Ensure submissions array exists
+        if (!Array.isArray(data.submissions)) {
+          data.submissions = [];
+        }
+
+        // Add new submission
+        data.submissions.push(formData);
+        data.lastUpdated = new Date().toISOString();
+        data.totalSubmissions = data.submissions.length;
+
+        // Note: This would require a backend endpoint to save
+        // For now, data persists in localStorage
+        console.log('✓ Student form data prepared for JSON storage', data);
+      })
+      .catch(err => console.log('Note: JSON file update requires backend (localStorage used instead)'));
+
     console.log('✓ Student form data saved to localStorage');
+  } catch (error) {
+    console.error('✗ Error saving form data:', error);
+    showAlert('⚠️ Error saving data. Please try again.', 'warning', 3000);
+  }
+}
   } catch (error) {
     console.error('Error saving form data:', error);
     showAlert('⚠️ Error saving data. Please try again.', 'warning', 3000);

@@ -18,10 +18,10 @@
 // ===================================
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Initialize theme system first
-  initializeThemeSystem();
+  // Set dark mode as default
+  document.documentElement.setAttribute('data-theme', 'dark');
   
-  // Then load navbar
+  // Load navbar
   loadNavbar();
 });
 
@@ -42,7 +42,8 @@ function loadNavbar() {
       <div class="container-fluid">
         <!-- Brand -->
         <a class="navbar-brand" href="index.html">
-          🅿️ Marlboro High School Parking
+          <img src="public/images/MustangsLogo.png" alt="Marlboro Mustangs Logo" height="40" class="me-2">
+          Marlboro High School Parking
         </a>
 
         <!-- Toggler for Mobile -->
@@ -72,17 +73,7 @@ function loadNavbar() {
               <a class="nav-link" href="form.html">Form</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="confirmation.html">Confirmation</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="admin.html">Admin</a>
-            </li>
-
-            <!-- Theme Toggle Button -->
-            <li class="nav-item">
-              <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                🌙
-              </button>
             </li>
           </ul>
         </div>
@@ -91,69 +82,6 @@ function loadNavbar() {
   `;
 
   navbarContainer.innerHTML = navbarHTML;
-
-  // Attach theme toggle event listener
-  const themeToggle = document.getElementById('themeToggle');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', toggleTheme);
-  }
-}
-
-/**
- * Initialize light/dark mode toggle functionality
- * Sets up theme on page load and attaches click handler
- */
-function initializeThemeSystem() {
-  // Get stored theme preference from LocalStorage (default to 'light')
-  const storedTheme = getFromLocalStorage('theme', 'light');
-  
-  // Apply the stored theme
-  applyTheme(storedTheme);
-  
-  // Update button icon
-  updateThemeToggleButton(storedTheme);
-}
-
-/**
- * Apply theme to the document
- * @param {string} theme - 'light' or 'dark'
- */
-function applyTheme(theme) {
-  const htmlElement = document.documentElement;
-  
-  if (theme === 'dark') {
-    htmlElement.setAttribute('data-theme', 'dark');
-  } else {
-    htmlElement.removeAttribute('data-theme');
-  }
-  
-  // Save preference to LocalStorage
-  saveToLocalStorage('theme', theme);
-}
-
-/**
- * Toggle between light and dark mode
- */
-function toggleTheme() {
-  const htmlElement = document.documentElement;
-  const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  
-  applyTheme(newTheme);
-  updateThemeToggleButton(newTheme);
-}
-
-/**
- * Update theme toggle button icon based on current theme
- * @param {string} theme - 'light' or 'dark'
- */
-function updateThemeToggleButton(theme) {
-  const themeToggle = document.getElementById('themeToggle');
-  
-  if (themeToggle) {
-    // Show sun icon in dark mode (to switch to light), moon in light mode (to switch to dark)
-    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-  }
 }
 
 // ===================================

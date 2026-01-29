@@ -12,7 +12,7 @@
   />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="public/css/style.css" />
 </head>
 <body>
   <!-- ========================================
@@ -27,9 +27,14 @@
     <div class="container mt-5 mb-5">
       <div class="row">
         <div class="col-md-8 offset-md-2">
+          <!-- Logo Section -->
+          <div class="text-center mb-4">
+            <img src="public/images/MustangsLogo.png" alt="Marlboro Mustangs Logo" style="max-height: 80px;">
+          </div>
+
           <!-- Success Message -->
           <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <h4 class="alert-heading">✓ Submission Successful!</h4>
+            <h4 class="alert-heading">Submission Successful!</h4>
             <p class="mb-0">
               Your parking spot has been reserved. Please review the details below.
             </p>
@@ -38,7 +43,7 @@
           <!-- Confirmation Card -->
           <div class="card mb-4">
             <div class="card-header">
-              <h5 class="mb-0">📍 Assigned Parking Spot</h5>
+              <h5 class="mb-0">Assigned Parking Spot</h5>
             </div>
             <div class="card-body">
               <div class="row">
@@ -57,6 +62,16 @@
                   <h3 class="text-primary mb-3">
                     <span id="confirmSpot">-</span>
                   </h3>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <p class="mb-2">
+                    <strong>Selected Option:</strong>
+                  </p>
+                  <h4 class="text-secondary">
+                    <span id="confirmOption">-</span>
+                  </h4>
                 </div>
               </div>
             </div>
@@ -157,7 +172,7 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
   <!-- Custom App JS -->
-  <script src="js/app.js"></script>
-  <script src="js/confirmation.js"></script>
+  <script src="public/js/app.js"></script>
+  <script src="public/js/confirmation.js"></script>
 </body>
 </html>

@@ -22,12 +22,70 @@
   border: 2px solid var(--border-color);
   border-radius: 6px;
   display: flex;
-  cursor: pointer;
+  flex-direction: column;
+  cursor: default;
   transition: all 0.3s ease;
   background-color: var(--card-bg);
   position: relative;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+}
+
+.spot-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 8px;
+}
+
+.spot-header {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.spot-number {
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: var(--text-color);
+}
+
+.spot-options {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+}
+
+.spot-btn {
+  flex: 1;
+  padding: 2px 4px;
+  border: none;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: linear-gradient(135deg, rgba(255, 184, 28, 0.3) 0%, rgba(255, 184, 28, 0.15) 100%);
+  color: var(--text-color);
+  border: 1px solid var(--secondary-color);
+}
+
+.spot-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 184, 28, 0.4) 0%, rgba(255, 184, 28, 0.2) 100%);
+  transform: scale(1.05);
+}
+
+.spot-btn:active {
+  transform: scale(0.95);
+}
+
+.spot-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(200, 0, 0, 0.1);
+  border-color: var(--danger-color);
 }
 
 /* Available Spot (Green) */
@@ -202,4 +260,21 @@
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
   }
+}
+/* ===========================
+   LOT INFORMATION CARDS
+   =========================== */
+
+.card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }

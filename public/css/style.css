@@ -3,35 +3,35 @@
    =========================== */
 
 :root {
-  /* Light Mode Colors */
-  --primary-color: #2c3e50;
-  --secondary-color: #3498db;
-  --success-color: #27ae60;
-  --danger-color: #e74c3c;
-  --warning-color: #f39c12;
-  --light-bg: #ecf0f1;
-  --dark-bg: #2c3e50;
-  --text-dark: #2c3e50;
-  --text-light: #ecf0f1;
-  --border-color: #bdc3c7;
-  --card-bg: #ffffff;
-  --navbar-bg: #34495e;
+  /* Light Mode Colors - Gold and Navy */
+  --primary-color: #001a4d;
+  --secondary-color: #FFB81C;
+  --success-color: #16A34A;
+  --danger-color: #DC2626;
+  --warning-color: #F59E0B;
+  --light-bg: #F5F5F5;
+  --dark-bg: #001a4d;
+  --text-dark: #001a4d;
+  --text-light: #F5F5F5;
+  --border-color: #FFB81C;
+  --card-bg: #FFFFFF;
+  --navbar-bg: #001a4d;
 }
 
 [data-theme="dark"] {
-  /* Dark Mode Colors */
-  --primary-color: #ecf0f1;
-  --secondary-color: #3498db;
-  --success-color: #2ecc71;
-  --danger-color: #e74c3c;
-  --warning-color: #f39c12;
-  --light-bg: #1e1e1e;
-  --dark-bg: #1e1e1e;
-  --text-dark: #ecf0f1;
-  --text-light: #2c3e50;
-  --border-color: #34495e;
-  --card-bg: #2c3e50;
-  --navbar-bg: #1a1a1a;
+  /* Dark Mode Colors - Gold and Navy */
+  --primary-color: #FFD700;
+  --secondary-color: #FFB81C;
+  --success-color: #86EFAC;
+  --danger-color: #FCA5A5;
+  --warning-color: #FCD34D;
+  --light-bg: #0a1f47;
+  --dark-bg: #0a1f47;
+  --text-dark: #FFD700;
+  --text-light: #001a4d;
+  --border-color: #FFB81C;
+  --card-bg: #1a3a6d;
+  --navbar-bg: #001a4d;
 }
 
 * {
@@ -55,22 +55,23 @@ html, body {
 nav {
   background-color: var(--navbar-bg) !important;
   border-bottom: 2px solid var(--secondary-color);
-  padding: 1rem 0 !important;
+  padding: 0.5rem 0 !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   color: var(--text-dark) !important;
   letter-spacing: 0.5px;
 }
 
 .nav-link {
   color: var(--text-dark) !important;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   transition: color 0.3s ease;
   font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .nav-link:hover {
@@ -590,26 +591,26 @@ a:hover {
 }
 
 .accordion-button {
-  color: var(--text-dark);
+  color: var(--text-color);
   font-weight: 600;
-  background-color: var(--card-bg);
+  background-color: rgba(255, 184, 28, 0.05);
   border: 1px solid var(--border-color);
 }
 
 .accordion-button:not(.collapsed) {
-  background-color: rgba(52, 152, 219, 0.1);
+  background-color: rgba(255, 184, 28, 0.15);
   color: var(--secondary-color);
   border-color: var(--secondary-color);
 }
 
 .accordion-button:focus {
   border-color: var(--secondary-color);
-  box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(255, 184, 28, 0.25);
 }
 
 .accordion-body {
-  background-color: rgba(52, 152, 219, 0.05);
-  color: var(--text-dark);
+  background-color: rgba(255, 184, 28, 0.05);
+  color: var(--text-color);
   border-top: 1px solid var(--border-color);
 }
 

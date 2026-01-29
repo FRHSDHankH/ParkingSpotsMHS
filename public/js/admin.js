@@ -10,7 +10,7 @@
  * - Inactivity detection and auto-logout
  * - Failed login attempt tracking
  *
- * PASSWORD: admin2024 (changeable constant)
+ * PASSWORD: MHSAdmin957734! (changeable constant)
  * STORAGE: Saves adminSession to localStorage
  * SESSION: 30-minute timeout + activity reset
  * SECURITY: Warns on failed attempts + session expiry
@@ -18,7 +18,7 @@
  */
 
 // Admin password (in production, this should be hashed and server-side)
-const ADMIN_PASSWORD = 'admin2024';
+const ADMIN_PASSWORD = 'MHSAdmin957734!';
 
 // Session timeout (30 minutes in milliseconds)
 const SESSION_TIMEOUT = 30 * 60 * 1000;

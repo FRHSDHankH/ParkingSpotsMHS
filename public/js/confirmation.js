@@ -48,7 +48,7 @@ function loadAndDisplayConfirmation() {
   }
 
   // Display parking spot information
-  displayParkingSpotInfo(formData.selectedLot, formData.selectedSpot);
+  displayParkingSpotInfo(formData.selectedLot, formData.selectedSpot, formData.selectedOption);
 
   // Display student information
   displayStudentInfo(formData);
@@ -63,18 +63,20 @@ function loadAndDisplayConfirmation() {
  * Display assigned parking lot and spot
  * @param {string} lot - Parking lot letter (A, B, C)
  * @param {string} spotId - Spot ID
+ * @param {string} option - Selected option (A, B, or Solo)
  */
-function displayParkingSpotInfo(lot, spotId) {
+function displayParkingSpotInfo(lot, spotId, option = 'Solo') {
   // Get lot name from parking data (or simple mapping)
   const lotName = `Parking Lot ${lot}`;
   
   // Display lot and spot
   document.getElementById('confirmLot').textContent = lotName;
   document.getElementById('confirmSpot').textContent = spotId;
+  document.getElementById('confirmOption').textContent = option;
 
   // Get day information from parking data (in real implementation)
   // For now, we'll show the spot ID which contains the lot letter
-  console.log(`Assigned: ${lotName}, Spot ${spotId}`);
+  console.log(`Assigned: ${lotName}, Spot ${spotId}, Option ${option}`);
 }
 
 /**

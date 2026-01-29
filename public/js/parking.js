@@ -4,13 +4,13 @@
  * ===================================
  * Manages the parking spot selection interface. Handles:
  * - Dynamic parking lot grid generation (CSS Grid)
- * - Parking spot components with dual-half clickable areas
- * - Spot status: available (green), taken (red), selected (blue)
- * - Lot switching (A, B, C)
+ * - Parking spot components with clickable areas
+ * - Spot status: available, taken, selected
+ * - Lot switching (A, B)
  * - Spot selection with visual feedback
  * - Data persistence to localStorage for form.js
  *
- * DATA STRUCTURE: parkingData object contains 3 lots with 20 spots each
+ * DATA STRUCTURE: parkingData loaded from JSON with 291 total spots
  * STORAGE: Saves selectedLot, selectedSpot to localStorage
  * UI FEEDBACK: Selection card shows lot name and spot number
  * NEXT: Form.js retrieves selected spot from localStorage
@@ -19,92 +19,38 @@
 // Current selected spot and lot
 let currentSelectedSpot = null;
 let currentSelectedLot = null;
+let parkingData = {};
 
-// Sample parking data structure
-const parkingData = {
-  A: {
-    name: 'Parking Lot A',
-    totalSpots: 20,
-    spots: [
-      { id: 'A1', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A2', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A3', status: 'taken', day1: 'Mon', day2: 'Tue' },
-      { id: 'A4', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A5', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A6', status: 'taken', day1: 'Mon', day2: 'Tue' },
-      { id: 'A7', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A8', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A9', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A10', status: 'taken', day1: 'Mon', day2: 'Tue' },
-      { id: 'A11', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A12', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A13', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A14', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A15', status: 'taken', day1: 'Mon', day2: 'Tue' },
-      { id: 'A16', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A17', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A18', status: 'available', day1: 'Mon', day2: 'Tue' },
-      { id: 'A19', status: 'taken', day1: 'Mon', day2: 'Tue' },
-      { id: 'A20', status: 'available', day1: 'Mon', day2: 'Tue' },
-    ]
-  },
-  B: {
-    name: 'Parking Lot B',
-    totalSpots: 20,
-    spots: [
-      { id: 'B1', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B2', status: 'taken', day1: 'Wed', day2: 'Thu' },
-      { id: 'B3', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B4', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B5', status: 'taken', day1: 'Wed', day2: 'Thu' },
-      { id: 'B6', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B7', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B8', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B9', status: 'taken', day1: 'Wed', day2: 'Thu' },
-      { id: 'B10', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B11', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B12', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B13', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B14', status: 'taken', day1: 'Wed', day2: 'Thu' },
-      { id: 'B15', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B16', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B17', status: 'taken', day1: 'Wed', day2: 'Thu' },
-      { id: 'B18', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B19', status: 'available', day1: 'Wed', day2: 'Thu' },
-      { id: 'B20', status: 'available', day1: 'Wed', day2: 'Thu' },
-    ]
-  },
-  C: {
-    name: 'Parking Lot C',
-    totalSpots: 20,
-    spots: [
-      { id: 'C1', status: 'taken', day1: 'Fri', day2: 'Sat' },
-      { id: 'C2', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C3', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C4', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C5', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C6', status: 'taken', day1: 'Fri', day2: 'Sat' },
-      { id: 'C7', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C8', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C9', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C10', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C11', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C12', status: 'taken', day1: 'Fri', day2: 'Sat' },
-      { id: 'C13', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C14', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C15', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C16', status: 'taken', day1: 'Fri', day2: 'Sat' },
-      { id: 'C17', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C18', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C19', status: 'available', day1: 'Fri', day2: 'Sat' },
-      { id: 'C20', status: 'available', day1: 'Fri', day2: 'Sat' },
-    ]
+// Load parking data from JSON file
+async function loadParkingData() {
+  try {
+    const response = await fetch('public/data/parkingData.json');
+    const data = await response.json();
+    
+    // Convert lot structure to match expected format
+    parkingData = {
+      A: {
+        name: data.parkingLots.A.name,
+        totalSpots: data.parkingLots.A.totalSpots,
+        spots: data.parkingLots.A.spots
+      },
+      B: {
+        name: data.parkingLots.B.name,
+        totalSpots: data.parkingLots.B.totalSpots,
+        spots: data.parkingLots.B.spots
+      }
+    };
+    
+    console.log('✓ Parking data loaded:', { A: parkingData.A.totalSpots, B: parkingData.B.totalSpots, Total: parkingData.A.totalSpots + parkingData.B.totalSpots });
+    initializeParkingPage();
+  } catch (error) {
+    console.error('Failed to load parking data:', error);
   }
-};
+}
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Initialize parking page
-  initializeParkingPage();
+  // Load parking data first
+  loadParkingData();
 });
 
 /**
@@ -130,7 +76,7 @@ function initializeParkingPage() {
 
 /**
  * Switch to a different parking lot
- * @param {string} lotId - Lot A, B, or C
+ * @param {string} lotId - Lot A or B
  */
 function switchLot(lotId) {
   currentSelectedLot = lotId;
@@ -155,7 +101,7 @@ function switchLot(lotId) {
 
 /**
  * Render parking lot grid with spots
- * @param {string} lotId - Lot A, B, or C
+ * @param {string} lotId - Lot A or B
  */
 function renderParkingLot(lotId) {
   const container = document.getElementById('parkingLotContainer');
@@ -172,61 +118,53 @@ function renderParkingLot(lotId) {
 }
 
 /**
- * Create a parking spot element with two halves
- * @param {object} spot - Spot data
+ * Create a parking spot element with A/B options
+ * @param {object} spot - Spot data from JSON
  * @returns {HTMLElement} - Parking spot element
  */
 function createParkingSpot(spot) {
   const spotDiv = document.createElement('div');
-  spotDiv.className = `parking-spot ${spot.status}`;
+  spotDiv.className = `parking-spot ${spot.taken ? 'taken' : 'available'}`;
   spotDiv.dataset.spotId = spot.id;
 
-  // Create left half (Day 1)
-  const leftHalf = document.createElement('div');
-  leftHalf.className = 'spot-half';
-  leftHalf.innerHTML = `
-    <div class="spot-half-content">
-      <span class="spot-number">${spot.id}</span>
-      <span class="spot-day">${spot.day1}</span>
+  spotDiv.innerHTML = `
+    <div class="spot-container">
+      <div class="spot-header">
+        <span class="spot-number">${spot.number}</span>
+      </div>
+      <div class="spot-options">
+        <button class="spot-btn btn-option-a" data-option="A" ${spot.taken ? 'disabled' : ''}>
+          A
+        </button>
+        <button class="spot-btn btn-option-b" data-option="B" ${spot.taken ? 'disabled' : ''}>
+          B
+        </button>
+      </div>
     </div>
   `;
   
-  // Add click listener only if spot is available
-  if (spot.status === 'available') {
-    leftHalf.addEventListener('click', function () {
-      selectSpot(spot.id, spot);
+  // Add click listeners only if spot is available
+  if (!spot.taken) {
+    const optionBtns = spotDiv.querySelectorAll('.spot-btn');
+    optionBtns.forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const option = this.dataset.option;
+        selectSpot(spot.id, spot, option);
+      });
     });
   }
-
-  // Create right half (Day 2)
-  const rightHalf = document.createElement('div');
-  rightHalf.className = 'spot-half';
-  rightHalf.innerHTML = `
-    <div class="spot-half-content">
-      <span class="spot-number">${spot.id}</span>
-      <span class="spot-day">${spot.day2}</span>
-    </div>
-  `;
-
-  // Add click listener only if spot is available
-  if (spot.status === 'available') {
-    rightHalf.addEventListener('click', function () {
-      selectSpot(spot.id, spot);
-    });
-  }
-
-  spotDiv.appendChild(leftHalf);
-  spotDiv.appendChild(rightHalf);
 
   return spotDiv;
 }
 
 /**
- * Handle spot selection
- * @param {string} spotId - Spot ID (e.g., 'A1')
+ * Handle spot selection with option (A, B, or Solo)
+ * @param {string} spotId - Spot ID (e.g., 'A-1')
  * @param {object} spotData - Spot data object
+ * @param {string} option - Selection option: 'A', 'B', or 'Solo'
  */
-function selectSpot(spotId, spotData) {
+function selectSpot(spotId, spotData, option = '') {
   // Remove previous selection
   if (currentSelectedSpot) {
     const previousSpot = document.querySelector(`[data-spot-id="${currentSelectedSpot}"]`);
@@ -239,19 +177,28 @@ function selectSpot(spotId, spotData) {
   currentSelectedSpot = spotId;
   const spotElement = document.querySelector(`[data-spot-id="${spotId}"]`);
   spotElement.classList.add('selected');
+  spotElement.classList.add('taken');
 
-  // Show selected spot card
+  // Mark spot as taken in parking data
+  const spotIndex = parkingData[currentSelectedLot].spots.findIndex(s => s.id === spotId);
+  if (spotIndex !== -1) {
+    parkingData[currentSelectedLot].spots[spotIndex].taken = true;
+  }
+
+  // Show selected spot card with option
   const spotCard = document.getElementById('selectedSpotCard');
   document.getElementById('selectedLot').textContent = parkingData[currentSelectedLot].name;
-  document.getElementById('selectedSpot').textContent = spotId;
+  document.getElementById('selectedSpot').textContent = spotData.number;
+  document.getElementById('selectedOption').textContent = option || 'Solo';
   spotCard.style.display = 'block';
 
   // Save selected spot to localStorage for use in form
   saveToLocalStorage('selectedLot', parkingData[currentSelectedLot].name);
   saveToLocalStorage('selectedSpot', spotId);
+  saveToLocalStorage('selectedOption', option || 'Solo');
 
   // Save selection to LocalStorage
-  saveSelectedParking(currentSelectedLot, spotId);
+  saveSelectedParking(currentSelectedLot, spotId, option);
 
   // Scroll to selection card
   spotCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -259,18 +206,21 @@ function selectSpot(spotId, spotData) {
 
 /**
  * Save selected parking spot to LocalStorage
- * @param {string} lot - Parking lot (A, B, C)
- * @param {string} spotId - Spot ID (e.g., 'A1')
+ * @param {string} lot - Parking lot (A or B)
+ * @param {string} spotId - Spot ID (e.g., 'A-1')
+ * @param {string} option - Selection option (A, B, or Solo)
  */
-function saveSelectedParking(lot, spotId) {
+function saveSelectedParking(lot, spotId, option = '') {
   // Save individual keys for form access
   saveToLocalStorage('selectedLot', lot);
   saveToLocalStorage('selectedSpot', spotId);
+  saveToLocalStorage('selectedOption', option || 'Solo');
   
   // Also save combined object for reference
   const selectedParking = {
     lot: lot,
     spotId: spotId,
+    option: option || 'Solo',
     timestamp: new Date().toISOString()
   };
   saveToLocalStorage('selectedParking', selectedParking);
@@ -294,7 +244,12 @@ function loadSelectedParking() {
         currentSelectedSpot = selectedParking.spotId;
         const spotCard = document.getElementById('selectedSpotCard');
         document.getElementById('selectedLot').textContent = parkingData[selectedParking.lot].name;
-        document.getElementById('selectedSpot').textContent = selectedParking.spotId;
+        
+        // Find the spot number
+        const spot = parkingData[selectedParking.lot].spots.find(s => s.id === selectedParking.spotId);
+        if (spot) {
+          document.getElementById('selectedSpot').textContent = spot.number;
+        }
         spotCard.style.display = 'block';
       }
     }, 100);
