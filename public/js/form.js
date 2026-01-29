@@ -1,12 +1,18 @@
 /**
  * ===================================
- * STUDENT FORM SCRIPT
+ * STUDENT INFORMATION FORM SCRIPT (form.js)
  * ===================================
- * Handles:
- * - Form validation
- * - Selected spot display
- * - Form submission
- * - Data persistence to LocalStorage
+ * Manages student registration form. Handles:
+ * - Retrieves selected parking spot from parking.js
+ * - Form validation: required fields + ID format check
+ * - Student & partner information collection
+ * - Form submission and data persistence
+ * - Redirect to confirmation page
+ *
+ * VALIDATION: Bootstrap HTML5 + custom ID validation
+ * STORAGE: Saves formData to localStorage['studentFormData']
+ * STORAGE: Appends to localStorage['submissions'] array for admin
+ * SUBMISSION: Redirects to confirmation.html on success
  */
 
 document.addEventListener('DOMContentLoaded', function () {

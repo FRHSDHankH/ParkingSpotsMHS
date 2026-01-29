@@ -1,11 +1,18 @@
 /**
  * ===================================
- * CONFIRMATION PAGE SCRIPT
+ * CONFIRMATION PAGE SCRIPT (confirmation.js)
  * ===================================
- * Handles:
- * - Loading student submission data
- * - Displaying confirmation summary
- * - Showing next steps and important notes
+ * Displays submission confirmation. Handles:
+ * - Retrieves student form data from localStorage
+ * - Displays parking spot assignment details
+ * - Shows student and partner information
+ * - Displays next steps and important information
+ * - Handles redirect if no submission exists
+ *
+ * FLOW: Form.js → Confirmation.js (on success)
+ * STORAGE: Reads from localStorage['studentFormData']
+ * DISPLAY: Shows lot, spot, names, IDs, email, phone
+ * ACTION: Users can print or proceed to home
  */
 
 document.addEventListener('DOMContentLoaded', function () {

@@ -1,12 +1,19 @@
 /**
  * ===================================
- * PARKING PAGE SCRIPT
+ * PARKING LOT PAGE SCRIPT (parking.js)
  * ===================================
- * Handles:
- * - Parking lot grid UI generation
- * - Parking spot components with two halves
- * - Hover effects and color states
- * - Spot selection interactions
+ * Manages the parking spot selection interface. Handles:
+ * - Dynamic parking lot grid generation (CSS Grid)
+ * - Parking spot components with dual-half clickable areas
+ * - Spot status: available (green), taken (red), selected (blue)
+ * - Lot switching (A, B, C)
+ * - Spot selection with visual feedback
+ * - Data persistence to localStorage for form.js
+ *
+ * DATA STRUCTURE: parkingData object contains 3 lots with 20 spots each
+ * STORAGE: Saves selectedLot, selectedSpot to localStorage
+ * UI FEEDBACK: Selection card shows lot name and spot number
+ * NEXT: Form.js retrieves selected spot from localStorage
  */
 
 // Current selected spot and lot

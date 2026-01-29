@@ -1,11 +1,20 @@
 /**
  * ===================================
- * ADMIN DASHBOARD SCRIPT
+ * ADMIN DASHBOARD SCRIPT (admin.js)
  * ===================================
- * Handles:
- * - Admin authentication
- * - Session management
- * - Access control
+ * Manages admin authentication and dashboard. Handles:
+ * - Admin login with password verification
+ * - Session management with 30-minute timeout
+ * - Access control and view toggling
+ * - Logout with confirmation
+ * - Inactivity detection and auto-logout
+ * - Failed login attempt tracking
+ *
+ * PASSWORD: admin2024 (changeable constant)
+ * STORAGE: Saves adminSession to localStorage
+ * SESSION: 30-minute timeout + activity reset
+ * SECURITY: Warns on failed attempts + session expiry
+ * NEXT: Dashboard displays student data and controls
  */
 
 // Admin password (in production, this should be hashed and server-side)

@@ -1,11 +1,16 @@
 /**
  * ===================================
- * GLOBAL APPLICATION SCRIPT
+ * GLOBAL APPLICATION SCRIPT (app.js)
  * ===================================
- * Handles:
- * - Navbar injection
- * - Light/Dark mode UI setup
- * - Shared utilities
+ * Central hub for all pages. Handles:
+ * - Navbar injection on all pages
+ * - Light/Dark mode system with LocalStorage persistence
+ * - Shared utility functions (LocalStorage, alerts, formatting)
+ * - Theme toggle UI initialization
+ *
+ * USAGE: Include this script on all HTML pages before other scripts
+ * THEME: Uses CSS custom properties (:root and [data-theme="dark"])
+ * STORAGE: Saves theme preference to localStorage['theme']
  */
 
 // ===================================
