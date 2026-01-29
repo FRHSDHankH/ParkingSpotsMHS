@@ -277,20 +277,291 @@ function resetSessionTimeout() {
 function setupControlButtons() {
   const resetAllBtn = document.getElementById('resetAllBtn');
   const exportDataBtn = document.getElementById('exportDataBtn');
+  const searchInput = document.getElementById('searchInput');
 
   if (resetAllBtn) {
-    resetAllBtn.addEventListener('click', function () {
-      console.log('Reset all clicked - functionality in COMMIT 9');
-      // Will be implemented in COMMIT 9
-    });
+    resetAllBtn.addEventListener('click', handleResetAllData);
   }
 
   if (exportDataBtn) {
-    exportDataBtn.addEventListener('click', function () {
-      console.log('Export data clicked - functionality in COMMIT 9');
-      // Will be implemented in COMMIT 9
+    exportDataBtn.addEventListener('click', handleExportData);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', handleSearchSubmissions);
+  }
+
+  // Load and display all student data
+  loadAndDisplayAllSubmissions();
+}
+
+/**
+ * Load all student submissions and populate the dashboard
+ */
+function loadAndDisplayAllSubmissions() {
+  const submissions = getFromLocalStorage('submissions', []);
+  
+  // Update statistics
+  updateStatistics(submissions);
+
+  // Populate table
+  populateDataTable(submissions);
+
+  // Store for filtering
+  window.allSubmissions = submissions;
+  window.filteredSubmissions = submissions;
+}
+
+/**
+ * Update statistics cards
+ * @param {Array} submissions - Array of student submissions
+ */
+function updateStatistics(submissions) {
+  const totalSpots = 68; // 3 lots × ~22 spots average
+  const reservedSpots = submissions.length;
+  const availableSpots = totalSpots - reservedSpots;
+  const occupancyRate = Math.round((reservedSpots / totalSpots) * 100);
+
+  document.getElementById('totalSpotsDisplay').textContent = totalSpots;
+  document.getElementById('reservedSpotsDisplay').textContent = reservedSpots;
+  document.getElementById('availableSpotsDisplay').textContent = availableSpots;
+  document.getElementById('occupancyRateDisplay').textContent = occupancyRate + '%';
+
+  console.log(`Statistics: ${reservedSpots}/${totalSpots} spots reserved (${occupancyRate}%)`);
+}
+
+/**
+ * Populate data table with student submissions
+ * @param {Array} submissions - Array of student submissions to display
+ */
+function populateDataTable(submissions) {
+  const tableBody = document.getElementById('tableBody');
+  const noDataMsg = document.getElementById('noDataMsg');
+
+  // Clear existing rows
+  tableBody.innerHTML = '';
+
+  if (submissions.length === 0) {
+    noDataMsg.style.display = 'block';
+    return;
+  }
+
+  noDataMsg.style.display = 'none';
+
+  // Create row for each submission
+  submissions.forEach((submission, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${escapeHtml(submission.fullName)}</td>
+      <td>${escapeHtml(submission.studentId)}</td>
+      <td>${escapeHtml(submission.email)}</td>
+      <td>${escapeHtml(submission.partnerName)}</td>
+      <td>${escapeHtml(submission.partnerId)}</td>
+      <td><strong>${submission.selectedLot}</strong></td>
+      <td><strong>${submission.selectedSpot}</strong></td>
+      <td>
+        <button class="btn btn-sm btn-copy" onclick="copyToClipboard(${index})">
+          📋 Copy
+        </button>
+        <button class="btn btn-sm btn-remove" onclick="removeSpot(${index})">
+          🗑️ Remove
+        </button>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+
+  console.log(`✓ Populated table with ${submissions.length} submissions`);
+}
+
+/**
+ * Copy submission data to clipboard
+ * @param {number} index - Index of submission in array
+ */
+function copyToClipboard(index) {
+  const submission = window.filteredSubmissions[index];
+  
+  if (!submission) {
+    showAlert('❌ Error: Submission not found', 'danger', 2000);
+    return;
+  }
+
+  // Format data for copying
+  const copyText = `
+Student: ${submission.fullName} (ID: ${submission.studentId})
+Email: ${submission.email}
+Partner: ${submission.partnerName} (ID: ${submission.partnerId})
+Parking: Lot ${submission.selectedLot}, Spot ${submission.selectedSpot}
+Submitted: ${formatDateTime(submission.submittedAt)}
+  `.trim();
+
+  // Copy to clipboard
+  navigator.clipboard.writeText(copyText).then(() => {
+    showAlert('✓ Data copied to clipboard', 'success', 2000);
+    console.log('✓ Data copied to clipboard');
+  }).catch(() => {
+    showAlert('❌ Failed to copy to clipboard', 'danger', 2000);
+  });
+}
+
+/**
+ * Remove a parking spot reservation
+ * @param {number} index - Index of submission in array
+ */
+function removeSpot(index) {
+  const submission = window.filteredSubmissions[index];
+  
+  if (!submission) {
+    showAlert('❌ Error: Submission not found', 'danger', 2000);
+    return;
+  }
+
+  // Confirm removal
+  const confirmed = confirm(
+    `Remove parking reservation for ${submission.fullName} (Lot ${submission.selectedLot}, Spot ${submission.selectedSpot})?`
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  // Find original index in all submissions
+  const originalIndex = window.allSubmissions.findIndex(
+    s => s.studentId === submission.studentId && s.selectedSpot === submission.selectedSpot
+  );
+
+  if (originalIndex !== -1) {
+    // Remove from submissions
+    window.allSubmissions.splice(originalIndex, 1);
+    
+    // Save updated submissions
+    saveToLocalStorage('submissions', window.allSubmissions);
+
+    // Reload display
+    loadAndDisplayAllSubmissions();
+
+    showAlert(`✓ Removed ${submission.fullName}'s reservation`, 'success', 2000);
+    console.log(`✓ Removed submission at index ${originalIndex}`);
+  }
+}
+
+/**
+ * Handle search/filter functionality
+ */
+function handleSearchSubmissions() {
+  const searchInput = document.getElementById('searchInput');
+  const query = searchInput.value.toLowerCase().trim();
+
+  if (!query) {
+    // Show all if search is empty
+    window.filteredSubmissions = window.allSubmissions;
+  } else {
+    // Filter submissions
+    window.filteredSubmissions = window.allSubmissions.filter(submission => {
+      return (
+        submission.fullName.toLowerCase().includes(query) ||
+        submission.studentId.toLowerCase().includes(query) ||
+        submission.email.toLowerCase().includes(query) ||
+        submission.partnerName.toLowerCase().includes(query) ||
+        submission.partnerId.toLowerCase().includes(query) ||
+        submission.selectedLot.includes(query) ||
+        submission.selectedSpot.includes(query)
+      );
     });
   }
+
+  // Repopulate table with filtered results
+  populateDataTable(window.filteredSubmissions);
+  console.log(`✓ Filtered to ${window.filteredSubmissions.length} results`);
+}
+
+/**
+ * Handle reset all data confirmation
+ */
+function handleResetAllData() {
+  const confirmed = confirm(
+    '⚠️ WARNING: This will delete ALL student parking reservations. This action cannot be undone. Continue?'
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const secondConfirm = confirm(
+    'Are you absolutely sure? Click OK to delete all data.'
+  );
+
+  if (!secondConfirm) {
+    return;
+  }
+
+  // Clear all submissions
+  removeFromLocalStorage('submissions');
+  removeFromLocalStorage('studentFormData');
+  removeFromLocalStorage('selectedParking');
+  removeFromLocalStorage('selectedLot');
+  removeFromLocalStorage('selectedSpot');
+
+  // Reset display
+  window.allSubmissions = [];
+  window.filteredSubmissions = [];
+  loadAndDisplayAllSubmissions();
+
+  showAlert('✓ All parking data has been reset', 'warning', 3000);
+  console.log('✓ All parking data reset');
+}
+
+/**
+ * Handle export data to JSON file
+ */
+function handleExportData() {
+  const submissions = window.allSubmissions;
+
+  if (submissions.length === 0) {
+    showAlert('⚠️ No data to export', 'warning', 2000);
+    return;
+  }
+
+  // Create export object with metadata
+  const exportData = {
+    exportDate: new Date().toISOString(),
+    exportedBy: 'Admin Dashboard',
+    totalRecords: submissions.length,
+    data: submissions
+  };
+
+  // Convert to JSON string
+  const jsonString = JSON.stringify(exportData, null, 2);
+
+  // Create blob and download
+  const blob = new Blob([jsonString], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `parking_data_${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showAlert(`✓ Exported ${submissions.length} records to JSON`, 'success', 2000);
+  console.log('✓ Data exported successfully');
+}
+
+/**
+ * Escape HTML special characters to prevent XSS
+ * @param {string} text - Text to escape
+ * @returns {string} - Escaped text
+ */
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
 }
 
 console.log('✓ admin.js loaded successfully');
