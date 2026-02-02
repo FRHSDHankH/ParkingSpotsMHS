@@ -242,10 +242,5 @@ function saveStudentFormData(formData) {
     showAlert('⚠️ Error saving data. Please try again.', 'warning', 3000);
   }
 }
-  } catch (error) {
-    console.error('Error saving form data:', error);
-    showAlert('⚠️ Error saving data. Please try again.', 'warning', 3000);
-  }
-}
 
 console.log('✓ form.js loaded successfully');
