@@ -53,36 +53,39 @@
 
                 <!-- Student ID Field -->
                 <div class="mb-3">
-                  <label for="studentId" class="form-label">Student ID *</label>
+                  <label for="studentId" class="form-label">Student ID (7 digits) *</label>
                   <input
                     type="text"
                     class="form-control"
                     id="studentId"
-                    placeholder="123456"
+                    placeholder="1234567"
+                    pattern="[0-9]{7}"
+                    maxlength="7"
                     required
                   />
                   <div class="invalid-feedback">
-                    Please provide your student ID.
+                    Please provide a valid 7-digit student ID.
                   </div>
                 </div>
 
                 <!-- Email Field -->
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email Address *</label>
+                  <label for="email" class="form-label">Email Address (@frhsd.com) *</label>
                   <input
                     type="email"
                     class="form-control"
                     id="email"
-                    placeholder="student@school.edu"
+                    placeholder="student@frhsd.com"
+                    pattern="[a-zA-Z0-9._-]+@frhsd\.com"
                     required
                   />
                   <div class="invalid-feedback">
-                    Please provide a valid email address.
+                    Please provide a valid @frhsd.com email address.
                   </div>
                 </div>
 
                 <!-- Partner Name Field -->
-                <div class="mb-3">
+                <div class="mb-3" id="partnerNameContainer">
                   <label for="partnerName" class="form-label">Partner Name *</label>
                   <input
                     type="text"
@@ -97,24 +100,43 @@
                 </div>
 
                 <!-- Partner ID Field -->
-                <div class="mb-3">
-                  <label for="partnerId" class="form-label">Partner Student ID *</label>
+                <div class="mb-3" id="partnerIdContainer">
+                  <label for="partnerId" class="form-label">Partner Student ID (7 digits) *</label>
                   <input
                     type="text"
                     class="form-control"
                     id="partnerId"
-                    placeholder="654321"
+                    placeholder="1234567"
+                    pattern="[0-9]{7}"
+                    maxlength="7"
                     required
                   />
                   <div class="invalid-feedback">
-                    Please provide your partner's student ID.
+                    Please provide a valid 7-digit student ID.
                   </div>
                 </div>
 
+                <!-- Solo Spot Option -->
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="soloSpotCheckbox"
+                    />
+                    <label class="form-check-label" for="soloSpotCheckbox">
+                      I want a solo parking spot (no partner - requires admin approval)
+                    </label>
+                  </div>
+                  <small class="text-muted d-block mt-2">
+                    If checked, partner information will not be required, but your request will need approval from the admin.
+                  </small>
+                </div>
+
                 <!-- Selected Spot Display -->
-                <div class="mb-3 p-3 border rounded" style="background-color: rgba(52, 152, 219, 0.1)">
-                  <h6 class="mb-2">Selected Parking Spot:</h6>
-                  <p class="mb-0">
+                <div class="mb-3 p-3 border rounded" style="background-color: rgba(52, 152, 219, 0.1); color: var(--text-dark);">
+                  <h6 class="mb-2" style="color: var(--text-dark);">Selected Parking Spot:</h6>
+                  <p class="mb-0" style="color: var(--text-dark);">
                     <strong>
                       <span id="selectedLotDisplay">-</span> | Spot <span id="selectedSpotDisplay">-</span> - Option <span id="selectedOptionDisplay">-</span>
                     </strong>

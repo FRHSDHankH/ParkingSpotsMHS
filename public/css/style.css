@@ -163,9 +163,10 @@ nav {
 }
 
 .btn-primary:hover {
-  background-color: #2980b9;
-  border-color: #2980b9;
+  background-color: #FFA600;
+  border-color: #FFA600;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 184, 28, 0.3);
 }
 
 .btn-success {
@@ -591,15 +592,15 @@ a:hover {
 }
 
 .accordion-button {
-  color: var(--text-color);
+  color: var(--text-dark);
   font-weight: 600;
-  background-color: rgba(255, 184, 28, 0.05);
-  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
 }
 
 .accordion-button:not(.collapsed) {
-  background-color: rgba(255, 184, 28, 0.15);
-  color: var(--secondary-color);
+  background-color: var(--secondary-color);
+  color: white;
   border-color: var(--secondary-color);
 }
 
@@ -609,9 +610,9 @@ a:hover {
 }
 
 .accordion-body {
-  background-color: rgba(255, 184, 28, 0.05);
-  color: var(--text-color);
-  border-top: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-dark);
+  border-top: 2px solid var(--border-color);
 }
 
 /* Contact Section */

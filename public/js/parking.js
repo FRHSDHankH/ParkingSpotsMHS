@@ -57,7 +57,15 @@ document.addEventListener('DOMContentLoaded', function () {
  * Initialize the parking page
  */
 function initializeParkingPage() {
-  // Set up lot button listeners
+  // Set up lot card listeners (new clickable cards)
+  const lotCards = document.querySelectorAll('.lot-card');
+  lotCards.forEach((card) => {
+    card.addEventListener('click', function () {
+      switchLot(this.dataset.lot);
+    });
+  });
+
+  // Set up lot button listeners (existing buttons)
   const lotButtons = document.querySelectorAll('.lot-btn');
   lotButtons.forEach((btn) => {
     btn.addEventListener('click', function () {
@@ -194,7 +202,8 @@ function selectSpot(spotId, spotData, option = '') {
 
   // Save selected spot to localStorage for use in form
   saveToLocalStorage('selectedLot', parkingData[currentSelectedLot].name);
-  saveToLocalStorage('selectedSpot', spotId);
+  saveToLocalStorage('selectedSpot', spotData.number);
+  saveToLocalStorage('selectedSpotId', spotId);
   saveToLocalStorage('selectedOption', option || 'Solo');
 
   // Save selection to LocalStorage

@@ -27,10 +27,41 @@ function initializeFormPage() {
   // Display selected parking spot
   displaySelectedSpot();
 
+  // Setup solo spot checkbox listener
+  const soloSpotCheckbox = document.getElementById('soloSpotCheckbox');
+  if (soloSpotCheckbox) {
+    soloSpotCheckbox.addEventListener('change', togglePartnerFields);
+  }
+
   // Setup form submission
   const form = document.getElementById('studentForm');
   if (form) {
     form.addEventListener('submit', handleFormSubmission);
+  }
+}
+
+/**
+ * Toggle partner fields visibility based on solo spot checkbox
+ */
+function togglePartnerFields() {
+  const soloSpotCheckbox = document.getElementById('soloSpotCheckbox');
+  const partnerNameContainer = document.getElementById('partnerNameContainer');
+  const partnerIdContainer = document.getElementById('partnerIdContainer');
+  const partnerName = document.getElementById('partnerName');
+  const partnerId = document.getElementById('partnerId');
+
+  if (soloSpotCheckbox.checked) {
+    // Hide partner fields and remove required attribute
+    partnerNameContainer.style.display = 'none';
+    partnerIdContainer.style.display = 'none';
+    partnerName.removeAttribute('required');
+    partnerId.removeAttribute('required');
+  } else {
+    // Show partner fields and add required attribute
+    partnerNameContainer.style.display = 'block';
+    partnerIdContainer.style.display = 'block';
+    partnerName.setAttribute('required', 'required');
+    partnerId.setAttribute('required', 'required');
   }
 }
 
@@ -71,6 +102,7 @@ function handleFormSubmission(e) {
   e.preventDefault();
 
   const form = document.getElementById('studentForm');
+  const soloSpotCheckbox = document.getElementById('soloSpotCheckbox');
 
   // Bootstrap form validation
   if (!form.checkValidity()) {
@@ -80,13 +112,29 @@ function handleFormSubmission(e) {
     return;
   }
 
+  // Validate email ends with @frhsd.com
+  const email = document.getElementById('email').value.trim();
+  if (!email.endsWith('@frhsd.com')) {
+    showAlert('❌ Email must end with @frhsd.com', 'danger', 3000);
+    return;
+  }
+
+  // Validate student ID is exactly 7 digits
+  const studentId = document.getElementById('studentId').value.trim();
+  if (!/^[0-9]{7}$/.test(studentId)) {
+    showAlert('❌ Student ID must be exactly 7 digits.', 'danger', 3000);
+    return;
+  }
+
   // Collect form data
   const formData = {
     fullName: document.getElementById('fullName').value.trim(),
-    studentId: document.getElementById('studentId').value.trim(),
-    email: document.getElementById('email').value.trim(),
-    partnerName: document.getElementById('partnerName').value.trim(),
-    partnerId: document.getElementById('partnerId').value.trim(),
+    studentId: studentId,
+    email: email,
+    soloSpot: soloSpotCheckbox.checked,
+    approvalPending: soloSpotCheckbox.checked,
+    partnerName: soloSpotCheckbox.checked ? '' : document.getElementById('partnerName').value.trim(),
+    partnerId: soloSpotCheckbox.checked ? '' : document.getElementById('partnerId').value.trim(),
     selectedLot: getFromLocalStorage('selectedLot', null),
     selectedSpot: getFromLocalStorage('selectedSpot', null),
     selectedOption: getFromLocalStorage('selectedOption', 'Solo'),
@@ -105,16 +153,23 @@ function handleFormSubmission(e) {
     return;
   }
 
-  if (!isValidStudentId(formData.partnerId)) {
-    showAlert('❌ Invalid partner student ID format.', 'danger', 3000);
-    return;
+  // Validate partner ID if not a solo spot
+  if (!soloSpotCheckbox.checked && formData.partnerId) {
+    if (!/^[0-9]{7}$/.test(formData.partnerId)) {
+      showAlert('❌ Partner student ID must be exactly 7 digits.', 'danger', 3000);
+      return;
+    }
   }
 
   // Save form data to localStorage
   saveStudentFormData(formData);
 
   // Show success message
-  showAlert('✓ Form submitted successfully! Redirecting to confirmation...', 'success', 2000);
+  if (soloSpotCheckbox.checked) {
+    showAlert('✓ Form submitted! Your solo spot request is pending admin approval.', 'success', 2000);
+  } else {
+    showAlert('✓ Form submitted successfully! Redirecting to confirmation...', 'success', 2000);
+  }
 
   // Redirect to confirmation page after brief delay
   setTimeout(() => {
@@ -123,13 +178,13 @@ function handleFormSubmission(e) {
 }
 
 /**
- * Validate student ID format (basic validation)
+ * Validate student ID format - must be 7 digits
  * @param {string} id - Student ID
  * @returns {boolean} - True if valid
  */
 function isValidStudentId(id) {
-  // Allow alphanumeric IDs with at least 3 characters
-  return id && id.length >= 3 && /^[a-zA-Z0-9]{3,}$/.test(id);
+  // Must be exactly 7 digits
+  return id && /^[0-9]{7}$/.test(id);
 }
 
 /**
