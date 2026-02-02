@@ -18,7 +18,7 @@
  */
 
 // Admin password (in production, this should be hashed and server-side)
-const ADMIN_PASSWORD = 'MHSAdmin957734!';
+const ADMIN_PASSWORD = 'HanksChopped';
 
 // Session timeout (30 minutes in milliseconds)
 const SESSION_TIMEOUT = 30 * 60 * 1000;
@@ -101,11 +101,18 @@ function refreshAdminSession() {
 function setupLoginForm() {
   const loginForm = document.getElementById('loginForm');
   
+  console.log('📋 Setting up login form...');
+  console.log('loginForm element:', loginForm);
+  
   if (loginForm) {
     loginForm.addEventListener('submit', function (e) {
+      console.log('📝 Form submitted!');
       e.preventDefault();
       handleLoginSubmission();
     });
+    console.log('✓ Login form event listener attached');
+  } else {
+    console.error('❌ loginForm element not found!');
   }
 }
 
@@ -116,30 +123,48 @@ function handleLoginSubmission() {
   const passwordInput = document.getElementById('adminPassword');
   const password = passwordInput.value.trim();
 
+  console.log('🔐 Login attempt started');
+
   // Validate password
   if (!password) {
-    showAlert('❌ Please enter a password', 'danger', 3000);
+    try {
+      showAlert('❌ Please enter a password', 'danger', 3000);
+    } catch (e) {
+      alert('Please enter a password');
+    }
     return;
   }
 
   // Check password
   if (password === ADMIN_PASSWORD) {
+    console.log('✓ Password correct, creating session...');
     // Create session
     createAdminSession();
     
     // Show success message
-    showAlert('✓ Login successful! Redirecting...', 'success', 1500);
+    try {
+      showAlert('✓ Login successful!', 'success', 800);
+    } catch (e) {
+      alert('Login successful!');
+    }
     
+    console.log('⏳ Calling showAdminDashboard in 300ms...');
     // Hide login screen and show dashboard
     setTimeout(() => {
+      console.log('📊 Attempting to show admin dashboard...');
       showAdminDashboard();
+      console.log('⏲️ Starting session timeout...');
       startSessionTimeout();
       // Clear password field
       passwordInput.value = '';
-    }, 1500);
+    }, 300);
   } else {
     // Invalid password
-    showAlert('❌ Invalid password. Please try again.', 'danger', 3000);
+    try {
+      showAlert('❌ Invalid password. Please try again.', 'danger', 3000);
+    } catch (e) {
+      alert('Invalid password. Please try again.');
+    }
     passwordInput.value = '';
     passwordInput.focus();
 
@@ -163,15 +188,25 @@ function logFailedLoginAttempt() {
  * Show admin dashboard
  */
 function showAdminDashboard() {
+  console.log('🔍 In showAdminDashboard function...');
   const loginScreen = document.getElementById('loginScreen');
   const adminDashboard = document.getElementById('adminDashboard');
 
+  console.log('loginScreen element:', loginScreen);
+  console.log('adminDashboard element:', adminDashboard);
+
   if (loginScreen) {
-    loginScreen.style.display = 'none';
+    loginScreen.style.setProperty('display', 'none', 'important');
+    console.log('✓ Set loginScreen display to none');
+  } else {
+    console.error('❌ loginScreen element not found!');
   }
 
   if (adminDashboard) {
-    adminDashboard.style.display = 'block';
+    adminDashboard.style.setProperty('display', 'block', 'important');
+    console.log('✓ Set adminDashboard display to block');
+  } else {
+    console.error('❌ adminDashboard element not found!');
   }
 
   console.log('✓ Admin dashboard displayed');
@@ -185,11 +220,11 @@ function showLoginScreen() {
   const adminDashboard = document.getElementById('adminDashboard');
 
   if (loginScreen) {
-    loginScreen.style.display = 'flex';
+    loginScreen.style.setProperty('display', 'flex', 'important');
   }
 
   if (adminDashboard) {
-    adminDashboard.style.display = 'none';
+    adminDashboard.style.setProperty('display', 'none', 'important');
   }
 
   console.log('✓ Login screen displayed');
@@ -326,8 +361,10 @@ function loadAndDisplayAllSubmissions() {
  * @param {Array} submissions - Array of student submissions
  */
 function updateStatistics(submissions) {
-  const totalSpots = 68; // 3 lots × ~22 spots average
-  const reservedSpots = submissions.length;
+  const totalSpots = 291; // Lot A: 132 + Lot B: 159
+  // Only count approved submissions
+  const approvedSubmissions = submissions.filter(s => s.status === 'approved');
+  const reservedSpots = approvedSubmissions.length;
   const availableSpots = totalSpots - reservedSpots;
   const occupancyRate = Math.round((reservedSpots / totalSpots) * 100);
 
@@ -360,22 +397,42 @@ function populateDataTable(submissions) {
   // Create row for each submission
   submissions.forEach((submission, index) => {
     const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${escapeHtml(submission.fullName)}</td>
-      <td>${escapeHtml(submission.studentId)}</td>
-      <td>${escapeHtml(submission.email)}</td>
-      <td>${escapeHtml(submission.partnerName)}</td>
-      <td>${escapeHtml(submission.partnerId)}</td>
-      <td><strong>${submission.selectedLot}</strong></td>
-      <td><strong>${submission.selectedSpot}</strong></td>
-      <td>
+    const status = submission.status || 'pending';
+    const statusBadge = status === 'approved' 
+      ? '<span class="badge bg-success">Approved</span>' 
+      : '<span class="badge bg-warning text-dark">Pending</span>';
+    
+    let actionButtons = '';
+    if (status === 'pending') {
+      actionButtons = `
+        <button class="btn btn-sm btn-success" onclick="approveSubmission(${index})">
+          ✅ Approve
+        </button>
+        <button class="btn btn-sm btn-danger" onclick="rejectSubmission(${index})">
+          ❌ Reject
+        </button>
+      `;
+    } else {
+      actionButtons = `
         <button class="btn btn-sm btn-copy" onclick="copyToClipboard(${index})">
           📋 Copy
         </button>
         <button class="btn btn-sm btn-remove" onclick="removeSpot(${index})">
           🗑️ Remove
         </button>
-      </td>
+      `;
+    }
+    
+    row.innerHTML = `
+      <td>${escapeHtml(submission.fullName)}</td>
+      <td>${escapeHtml(submission.studentId)}</td>
+      <td>${escapeHtml(submission.email)}</td>
+      <td>${escapeHtml(submission.partnerName || '-')}</td>
+      <td>${escapeHtml(submission.partnerId || '-')}</td>
+      <td><strong>${submission.selectedLot || '-'}</strong></td>
+      <td><strong>${submission.selectedSpot || '-'}</strong></td>
+      <td>${statusBadge}</td>
+      <td>${actionButtons}</td>
     `;
     tableBody.appendChild(row);
   });
@@ -451,6 +508,90 @@ function removeSpot(index) {
 
     showAlert(`✓ Removed ${submission.fullName}'s reservation`, 'success', 2000);
     console.log(`✓ Removed submission at index ${originalIndex}`);
+  }
+}
+
+/**
+ * Approve a pending parking spot request
+ * @param {number} index - Index of submission in filtered array
+ */
+function approveSubmission(index) {
+  const submission = window.filteredSubmissions[index];
+  
+  if (!submission) {
+    showAlert('❌ Error: Submission not found', 'danger', 2000);
+    return;
+  }
+
+  // Confirm approval
+  const confirmed = confirm(
+    `Approve parking spot for ${submission.fullName} (Lot ${submission.selectedLot}, Spot ${submission.selectedSpot})?`
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  // Find original index in all submissions
+  const originalIndex = window.allSubmissions.findIndex(
+    s => s.studentId === submission.studentId && s.email === submission.email
+  );
+
+  if (originalIndex !== -1) {
+    // Update status to approved
+    window.allSubmissions[originalIndex].status = 'approved';
+    window.allSubmissions[originalIndex].approvedAt = new Date().toISOString();
+    window.allSubmissions[originalIndex].approvedBy = 'Admin';
+    
+    // Save updated submissions
+    saveToLocalStorage('submissions', window.allSubmissions);
+
+    // Reload display
+    loadAndDisplayAllSubmissions();
+
+    showAlert(`✓ Approved ${submission.fullName}'s parking request`, 'success', 2000);
+    console.log(`✓ Approved submission at index ${originalIndex}`);
+  }
+}
+
+/**
+ * Reject a pending parking spot request
+ * @param {number} index - Index of submission in filtered array
+ */
+function rejectSubmission(index) {
+  const submission = window.filteredSubmissions[index];
+  
+  if (!submission) {
+    showAlert('❌ Error: Submission not found', 'danger', 2000);
+    return;
+  }
+
+  // Confirm rejection
+  const confirmed = confirm(
+    `Reject parking spot request for ${submission.fullName}?`
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  // Find original index in all submissions
+  const originalIndex = window.allSubmissions.findIndex(
+    s => s.studentId === submission.studentId && s.email === submission.email
+  );
+
+  if (originalIndex !== -1) {
+    // Remove from submissions entirely
+    window.allSubmissions.splice(originalIndex, 1);
+    
+    // Save updated submissions
+    saveToLocalStorage('submissions', window.allSubmissions);
+
+    // Reload display
+    loadAndDisplayAllSubmissions();
+
+    showAlert(`✓ Rejected ${submission.fullName}'s parking request`, 'warning', 2000);
+    console.log(`✓ Rejected submission at index ${originalIndex}`);
   }
 }
 

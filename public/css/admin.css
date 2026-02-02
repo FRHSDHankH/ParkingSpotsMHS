@@ -7,18 +7,45 @@
    =========================== */
 
 #loginScreen {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: #0a1f47;
+  color: #FFD700;
+}
+
+#loginScreen .card {
+  background-color: #1a3a6d;
+  color: #FFD700;
+  border-color: #FFB81C;
+}
+
+#loginScreen .card-header {
+  background-color: #FFB81C;
+  color: #001a4d;
 }
 
 #loginForm .form-control {
   border-radius: 5px;
   padding: 0.7rem;
+  background-color: #0a1f47;
+  color: #FFD700;
+  border-color: #FFB81C;
+}
+
+#loginForm .form-control::placeholder {
+  color: #FFB81C;
+}
+
+#loginForm label {
+  color: #FFD700;
 }
 
 #loginForm .btn {
   padding: 0.7rem;
   font-weight: 600;
   margin-top: 1rem;
+}
+
+#loginScreen p {
+  color: #FFD700;
 }
 
 /* ===========================

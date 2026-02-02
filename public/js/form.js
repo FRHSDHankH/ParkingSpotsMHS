@@ -28,7 +28,7 @@ function initializeFormPage() {
   displaySelectedSpot();
 
   // Setup solo spot checkbox listener
-  const soloSpotCheckbox = document.getElementById('soloSpotCheckbox');
+  const soloSpotCheckbox = document.getElementById('soloSpotRequest');
   if (soloSpotCheckbox) {
     soloSpotCheckbox.addEventListener('change', togglePartnerFields);
   }
@@ -44,9 +44,9 @@ function initializeFormPage() {
  * Toggle partner fields visibility based on solo spot checkbox
  */
 function togglePartnerFields() {
-  const soloSpotCheckbox = document.getElementById('soloSpotCheckbox');
-  const partnerNameContainer = document.getElementById('partnerNameContainer');
-  const partnerIdContainer = document.getElementById('partnerIdContainer');
+  const soloSpotCheckbox = document.getElementById('soloSpotRequest');
+  const partnerNameContainer = document.getElementById('partnerName').parentElement;
+  const partnerIdContainer = document.getElementById('partnerId').parentElement;
   const partnerName = document.getElementById('partnerName');
   const partnerId = document.getElementById('partnerId');
 
@@ -104,7 +104,7 @@ function handleFormSubmission(e) {
   e.preventDefault();
 
   const form = document.getElementById('studentForm');
-  const soloSpotCheckbox = document.getElementById('soloSpotCheckbox');
+  const soloSpotCheckbox = document.getElementById('soloSpotRequest');
 
   // Bootstrap form validation
   if (!form.checkValidity()) {
@@ -129,7 +129,6 @@ function handleFormSubmission(e) {
   }
 
   // Collect form data
-  const soloSpotRequested = document.getElementById('soloSpotRequest').checked;
   const formData = {
     fullName: document.getElementById('fullName').value.trim(),
     studentId: studentId,
@@ -141,9 +140,8 @@ function handleFormSubmission(e) {
     selectedLot: getFromLocalStorage('selectedLot', null),
     selectedSpot: getFromLocalStorage('selectedSpot', null),
     selectedOption: getFromLocalStorage('selectedOption', 'Solo'),
-    soloSpotRequested: soloSpotRequested,
-    approvalStatus: soloSpotRequested ? 'pending' : 'approved',
     submittedAt: new Date().toISOString(),
+    status: 'pending',
   };
 
   // Validate that a parking spot was selected

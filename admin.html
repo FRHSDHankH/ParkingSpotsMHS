@@ -14,6 +14,91 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="public/css/style.css" />
   <link rel="stylesheet" href="public/css/admin.css" />
+  
+  <style>
+    body {
+      background-color: #0a1f47;
+      color: #FFD700;
+    }
+    
+    main {
+      background-color: #0a1f47;
+    }
+    
+    #loginScreen {
+      background-color: #0a1f47;
+    }
+    
+    .card {
+      background-color: #1a3a6d;
+      color: #FFD700;
+      border-color: #FFB81C;
+    }
+    
+    .card-header {
+      background-color: #FFB81C;
+      color: #001a4d;
+    }
+    
+    .card-body {
+      color: #FFD700;
+    }
+    
+    h1, h2, h3, h4, h5 {
+      color: #FFD700;
+    }
+    
+    p {
+      color: #FFD700;
+    }
+    
+    label, .form-label {
+      color: #FFD700;
+    }
+    
+    .form-control {
+      background-color: #0a1f47;
+      color: #FFD700;
+      border-color: #FFB81C;
+    }
+    
+    .form-control::placeholder {
+      color: #FFB81C;
+    }
+    
+    .btn-primary {
+      background-color: #FFB81C;
+      border-color: #FFB81C;
+      color: #001a4d;
+    }
+    
+    .btn-primary:hover {
+      background-color: #FFA600;
+      border-color: #FFA600;
+    }
+    
+    #dataTable {
+      color: #FFD700;
+    }
+    
+    #dataTable thead {
+      background-color: #FFB81C;
+      color: #001a4d;
+    }
+    
+    #dataTable tbody tr {
+      background-color: #1a3a6d;
+      color: #FFD700;
+    }
+    
+    #dataTable tbody tr:hover {
+      background-color: #2a4a7d;
+    }
+    
+    .table-responsive {
+      background-color: #0a1f47;
+    }
+  </style>
 </head>
 <body>
   <!-- ========================================
@@ -26,31 +111,32 @@
        ======================================== -->
   <div id="loginScreen" class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh">
     <div class="row w-100">
-      <div class="col-md-4 offset-md-4">
+      <div class="col-md-6 col-lg-5 offset-md-3 offset-lg-3.5">
         <div class="text-center mb-4">
-          <img src="public/images/MustangsLogo.png" alt="Marlboro Mustangs Logo" style="max-height: 80px;">
+          <img src="public/images/MustangsLogo.png" alt="Marlboro Mustangs Logo" style="max-height: 100px;">
         </div>
-        <div class="card">
-          <div class="card-header">
+        <div class="card" style="padding: 2rem;">
+          <div class="card-header" style="font-size: 1.3rem; padding: 1.5rem;">
             <h4 class="mb-0 text-center">Admin Login</h4>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="padding: 2rem;">
             <form id="loginForm">
-              <div class="mb-3">
-                <label for="adminPassword" class="form-label">Admin Password</label>
+              <div class="mb-4">
+                <label for="adminPassword" class="form-label" style="font-size: 1.1rem;">Admin Password</label>
                 <input
                   type="password"
                   class="form-control"
                   id="adminPassword"
                   placeholder="Enter admin password"
+                  style="font-size: 1.05rem; padding: 0.8rem;"
                   required
                 />
               </div>
-              <button type="submit" class="btn btn-primary w-100">
+              <button type="submit" class="btn btn-primary w-100" style="font-size: 1.1rem; padding: 0.9rem;">
                 Login
               </button>
             </form>
-            <p class="text-muted text-center mt-3 mb-0">
+            <p class="text-muted text-center mt-4 mb-0" style="font-size: 1rem;">
               Only authorized admins can access this page
             </p>
           </div>
@@ -158,6 +244,7 @@
                       <th>Partner ID</th>
                       <th>Parking Lot</th>
                       <th>Spot #</th>
+                      <th>Status</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
