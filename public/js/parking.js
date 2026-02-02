@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
  * Initialize the parking page
  */
 function initializeParkingPage() {
-  // Set up lot button listeners
-  const lotButtons = document.querySelectorAll('.lot-btn');
-  lotButtons.forEach((btn) => {
-    btn.addEventListener('click', function () {
+  // Set up lot card listeners (clickable cards)
+  const lotCards = document.querySelectorAll('.lot-card');
+  lotCards.forEach((card) => {
+    card.addEventListener('click', function () {
       switchLot(this.dataset.lot);
     });
   });

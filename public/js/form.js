@@ -50,7 +50,9 @@ function displaySelectedSpot() {
 
   if (selectedLot && selectedSpot) {
     lotDisplay.textContent = selectedLot;
-    spotDisplay.textContent = selectedSpot;
+    // Extract just the number from spotId if it's formatted as "A-1"
+    const spotNumber = selectedSpot.includes('-') ? selectedSpot.split('-')[1] : selectedSpot;
+    spotDisplay.textContent = spotNumber;
     optionDisplay.textContent = selectedOption;
   } else {
     // If no spot selected, show warning
@@ -81,6 +83,7 @@ function handleFormSubmission(e) {
   }
 
   // Collect form data
+  const soloSpotRequested = document.getElementById('soloSpotRequest').checked;
   const formData = {
     fullName: document.getElementById('fullName').value.trim(),
     studentId: document.getElementById('studentId').value.trim(),
@@ -90,6 +93,8 @@ function handleFormSubmission(e) {
     selectedLot: getFromLocalStorage('selectedLot', null),
     selectedSpot: getFromLocalStorage('selectedSpot', null),
     selectedOption: getFromLocalStorage('selectedOption', 'Solo'),
+    soloSpotRequested: soloSpotRequested,
+    approvalStatus: soloSpotRequested ? 'pending' : 'approved',
     submittedAt: new Date().toISOString(),
   };
 
@@ -101,12 +106,19 @@ function handleFormSubmission(e) {
 
   // Validate student and partner IDs (basic format check)
   if (!isValidStudentId(formData.studentId)) {
-    showAlert('❌ Invalid student ID format.', 'danger', 3000);
+    showAlert('❌ Student ID must be exactly 7 digits.', 'danger', 3000);
     return;
   }
 
-  if (!isValidStudentId(formData.partnerId)) {
-    showAlert('❌ Invalid partner student ID format.', 'danger', 3000);
+  // Validate email ends in @frhsd.com
+  if (!formData.email.endsWith('@frhsd.com')) {
+    showAlert('❌ Email must end in @frhsd.com', 'danger', 3000);
+    return;
+  }
+
+  // Validate partner ID only if partner name is provided
+  if (formData.partnerName && !isValidStudentId(formData.partnerId)) {
+    showAlert('❌ Partner ID must be exactly 7 digits.', 'danger', 3000);
     return;
   }
 
@@ -123,13 +135,13 @@ function handleFormSubmission(e) {
 }
 
 /**
- * Validate student ID format (basic validation)
+ * Validate student ID format (exactly 7 digits)
  * @param {string} id - Student ID
  * @returns {boolean} - True if valid
  */
 function isValidStudentId(id) {
-  // Allow alphanumeric IDs with at least 3 characters
-  return id && id.length >= 3 && /^[a-zA-Z0-9]{3,}$/.test(id);
+  // Must be exactly 7 digits
+  return id && /^\d{7}$/.test(id);
 }
 
 /**
