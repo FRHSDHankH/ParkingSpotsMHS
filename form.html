@@ -53,18 +53,17 @@
 
                 <!-- Student ID Field -->
                 <div class="mb-3">
-                  <label for="studentId" class="form-label">Student ID (7 digits) *</label>
+                  <label for="studentId" class="form-label">Student ID * (7 digits)</label>
                   <input
                     type="text"
                     class="form-control"
                     id="studentId"
                     placeholder="1234567"
-                    pattern="[0-9]{7}"
-                    maxlength="7"
                     required
+                    pattern="\d{7}"
                   />
                   <div class="invalid-feedback">
-                    Please provide a valid 7-digit student ID.
+                    Please provide your 7-digit student ID.
                   </div>
                 </div>
 
@@ -75,68 +74,54 @@
                     type="email"
                     class="form-control"
                     id="email"
-                    placeholder="student@frhsd.com"
-                    pattern="[a-zA-Z0-9._-]+@frhsd\.com"
+                    placeholder="firstname@frhsd.com"
                     required
                   />
+                  <small class="form-text text-muted">Must end in @frhsd.com</small>
                   <div class="invalid-feedback">
-                    Please provide a valid @frhsd.com email address.
+                    Please provide a valid email address ending in @frhsd.com.
                   </div>
                 </div>
 
                 <!-- Partner Name Field -->
-                <div class="mb-3" id="partnerNameContainer">
-                  <label for="partnerName" class="form-label">Partner Name *</label>
+                <div class="mb-3">
+                  <label for="partnerName" class="form-label">Partner Name (Optional)</label>
                   <input
                     type="text"
                     class="form-control"
                     id="partnerName"
-                    placeholder="Partner Full Name"
-                    required
+                    placeholder="Partner Full Name (leave blank for solo spot)"
                   />
-                  <div class="invalid-feedback">
-                    Please provide your partner's name.
-                  </div>
+                  <small class="form-text text-muted">Leave blank if requesting a solo spot</small>
                 </div>
 
                 <!-- Partner ID Field -->
-                <div class="mb-3" id="partnerIdContainer">
-                  <label for="partnerId" class="form-label">Partner Student ID (7 digits) *</label>
+                <div class="mb-3">
+                  <label for="partnerId" class="form-label">Partner Student ID (7 digits - Optional)</label>
                   <input
                     type="text"
                     class="form-control"
                     id="partnerId"
-                    placeholder="1234567"
-                    pattern="[0-9]{7}"
-                    maxlength="7"
-                    required
+                    placeholder="1234567 (if you have a partner)"
+                    pattern="\d{7}"
                   />
-                  <div class="invalid-feedback">
-                    Please provide a valid 7-digit student ID.
-                  </div>
                 </div>
 
-                <!-- Solo Spot Option -->
+                <!-- Solo Spot Request -->
                 <div class="mb-3">
                   <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="soloSpotCheckbox"
-                    />
-                    <label class="form-check-label" for="soloSpotCheckbox">
-                      I want a solo parking spot (no partner - requires admin approval)
+                    <input class="form-check-input" type="checkbox" id="soloSpotRequest" />
+                    <label class="form-check-label" for="soloSpotRequest">
+                      Request a solo spot (requires admin approval)
                     </label>
                   </div>
-                  <small class="text-muted d-block mt-2">
-                    If checked, partner information will not be required, but your request will need approval from the admin.
-                  </small>
+                  <small class="form-text text-muted">Check this if you want your own spot instead of sharing with a partner</small>
                 </div>
 
                 <!-- Selected Spot Display -->
-                <div class="mb-3 p-3 border rounded" style="background-color: rgba(52, 152, 219, 0.1); color: var(--text-dark);">
-                  <h6 class="mb-2" style="color: var(--text-dark);">Selected Parking Spot:</h6>
-                  <p class="mb-0" style="color: var(--text-dark);">
+                <div class="mb-3 p-3 border rounded" style="background-color: rgba(255, 184, 28, 0.1)">
+                  <h6 class="mb-2">Selected Parking Spot:</h6>
+                  <p class="mb-0">
                     <strong>
                       <span id="selectedLotDisplay">-</span> | Spot <span id="selectedSpotDisplay">-</span> - Option <span id="selectedOptionDisplay">-</span>
                     </strong>
@@ -154,7 +139,7 @@
                 </div>
 
                 <p class="text-muted text-center mt-3 mb-0">
-                  * All fields are required
+                  Contact Dr. Bleakley (dbleakley@frhsd.com) for solo spot requests
                 </p>
               </form>
             </div>
