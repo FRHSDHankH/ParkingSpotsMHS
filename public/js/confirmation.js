@@ -66,8 +66,14 @@ function loadAndDisplayConfirmation() {
  * @param {string} option - Selected option (A, B, or Solo)
  */
 function displayParkingSpotInfo(lot, spotId, option = 'Solo') {
-  // Get lot name from parking data (or simple mapping)
-  const lotName = `Parking Lot ${lot}`;
+  // Map lot codes to lot names
+  const lotMap = {
+    'The Hill': 'The Hill',
+    'The Box': 'The Box',
+    'A': 'The Hill',
+    'B': 'The Box'
+  };
+  const lotName = lotMap[lot] || lot;
   
   // Display lot and spot
   document.getElementById('confirmLot').textContent = lotName;

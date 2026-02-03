@@ -31,6 +31,16 @@
       <!-- Lot Information Section (Clickable Cards) -->
       <div class="row mb-5">
         <div class="col-md-6 mb-3">
+          <div class="card h-100 lot-card" data-lot="B" style="cursor: pointer;">
+            <img src="public/images/AthleticsEntrance.jpg" class="card-img-top" alt="The Box">
+            <div class="card-body">
+              <h5 class="card-title">The Box</h5>
+              <p class="card-text">159 parking spots available. Premium lot with access to athletic facilities.</p>
+              <small class="text-muted">Click to select this lot</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
           <div class="card h-100 lot-card" data-lot="A" style="cursor: pointer;">
             <img src="public/images/MainEntrance.jpg" class="card-img-top" alt="Main Entrance">
             <div class="card-body">
@@ -40,22 +50,12 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 mb-3">
-          <div class="card h-100 lot-card" data-lot="B" style="cursor: pointer;">
-            <img src="public/images/AthleticsEntrance.jpg" class="card-img-top" alt="Athletics Entrance">
-            <div class="card-body">
-              <h5 class="card-title">Athletics Parking</h5>
-              <p class="card-text">159 parking spots available. Athletics area lot with access to athletic facilities.</p>
-              <small class="text-muted">Click to select this lot</small>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Current Lot Display -->
       <div class="row mb-4">
         <div class="col-12 text-center">
-          <h2 id="currentLot">The Hill</h2>
+          <h2 id="currentLot">The Box</h2>
           <p class="text-muted">Click on an available spot to select it</p>
         </div>
       </div>
@@ -69,28 +69,40 @@
         </div>
       </div>
 
-      <!-- Selected Spot Summary -->
-      <div class="row mb-4">
-        <div class="col-md-6 offset-md-3">
-          <div class="card" id="selectedSpotCard" style="display: none">
-            <div class="card-header">
-              <h5 class="mb-0">Selected Spot</h5>
-            </div>
-            <div class="card-body">
-              <p class="mb-2">
-                <strong>Lot:</strong> <span id="selectedLot">-</span>
-              </p>
-              <p class="mb-2">
-                <strong>Spot Number:</strong> <span id="selectedSpot">-</span>
-              </p>
-              <p class="mb-3">
-                <strong>Option:</strong> <span id="selectedOption">-</span>
-              </p>
-              <a href="form.html" class="btn btn-primary w-100">
-                Continue to Form
-              </a>
-            </div>
+      <!-- Parking Lot Top-View Screenshots -->
+      <div class="row mb-5">
+        <div class="col-md-6 mb-3">
+          <h5 class="text-center mb-3">The Box - Top View</h5>
+          <div class="card overflow-hidden" style="border-radius: 12px;">
+            <img src="public/images/Screenshot 2026-01-29 142708.png" class="card-img" alt="The Box top view" style="height: 250px; object-fit: cover;">
           </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <h5 class="text-center mb-3">The Hill - Top View</h5>
+          <div class="card overflow-hidden" style="border-radius: 12px;">
+            <img src="public/images/Screenshot 2026-01-29 142636.png" class="card-img" alt="The Hill top view" style="height: 250px; object-fit: cover;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Selected Spot Summary - Fixed Corner -->
+      <div class="card" id="selectedSpotCard" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 280px; z-index: 1000; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+        <div class="card-header">
+          <h5 class="mb-0">Selected Spot</h5>
+        </div>
+        <div class="card-body">
+          <p class="mb-2">
+            <strong>Lot:</strong> <span id="selectedLot">-</span>
+          </p>
+          <p class="mb-2">
+            <strong>Spot Number:</strong> <span id="selectedSpot">-</span>
+          </p>
+          <p class="mb-3">
+            <strong>Option:</strong> <span id="selectedOption">-</span>
+          </p>
+          <a href="form.html" class="btn btn-primary w-100">
+            Continue to Form
+          </a>
         </div>
       </div>
 

@@ -109,9 +109,9 @@
 
                 <!-- Solo Spot Request -->
                 <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soloSpotRequest" />
-                    <label class="form-check-label" for="soloSpotRequest">
+                  <div class="form-check" style="display: flex; align-items: center;">
+                    <input class="form-check-input" type="checkbox" id="soloSpotRequest" style="margin-right: 0.5rem; margin-top: 0;" />
+                    <label class="form-check-label" for="soloSpotRequest" style="margin-bottom: 0;">
                       Request a solo spot (requires admin approval)
                     </label>
                   </div>
@@ -132,6 +132,9 @@
                 <div class="d-grid gap-2 d-sm-flex">
                   <button type="submit" class="btn btn-primary btn-lg">
                     Submit Form
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-lg" onclick="changeSpot()">
+                    Change Spot
                   </button>
                   <a href="parking.html" class="btn btn-outline-secondary btn-lg">
                     Back to Parking

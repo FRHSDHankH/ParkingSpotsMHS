@@ -414,7 +414,7 @@ a:hover {
 
 /* Rules Section */
 .rules-section {
-  background-color: var(--card-bg);
+  background-color: transparent;
 }
 
 .rules-section h2 {
@@ -591,28 +591,39 @@ a:hover {
   border-radius: 2px;
 }
 
+.accordion-item {
+  border: 1px solid var(--border-color);
+  margin-bottom: 0;
+  border-radius: 8px;
+}
+
 .accordion-button {
-  color: var(--secondary-color);
+  color: var(--text-light);
   font-weight: 600;
-  background-color: var(--card-bg);
-  border: 2px solid var(--secondary-color);
+  background-color: #001a4d;
+  border: none;
+  padding: 1rem 1.5rem;
 }
 
 .accordion-button:not(.collapsed) {
-  background-color: var(--card-bg);
+  background-color: #001a4d;
   color: var(--secondary-color);
-  border-color: var(--secondary-color);
+  border: none;
+  box-shadow: none;
 }
 
 .accordion-button:focus {
-  border-color: var(--secondary-color);
-  box-shadow: 0 0 0 0.25rem rgba(255, 184, 28, 0.25);
+  border-color: transparent;
+  box-shadow: none;
+  outline: 2px solid var(--secondary-color);
+  outline-offset: -2px;
 }
 
 .accordion-body {
-  background-color: var(--card-bg);
-  color: var(--text-dark);
-  border-top: 2px solid var(--border-color);
+  background-color: #001a4d;
+  color: var(--text-light);
+  border-top: none;
+  padding: 1rem 1.5rem;
 }
 
 /* Contact Section */

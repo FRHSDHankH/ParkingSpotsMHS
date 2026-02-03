@@ -119,15 +119,18 @@
 
 #dataTable tbody tr {
   transition: background-color 0.2s ease;
+  background-color: var(--card-bg);
+  color: var(--text-dark);
 }
 
 #dataTable tbody tr:hover {
-  background-color: rgba(52, 152, 219, 0.05);
+  background-color: rgba(255, 184, 28, 0.1);
 }
 
 #dataTable tbody td {
   vertical-align: middle;
   padding: 0.8rem;
+  border-color: var(--border-color);
 }
 
 /* ===========================

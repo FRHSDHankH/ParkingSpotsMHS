@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
  * Initialize the form page
  */
 function initializeFormPage() {
+  // Check if returning from parking lot with saved form data
+  restoreFormData();
+  
   // Display selected parking spot
   displaySelectedSpot();
 
@@ -38,7 +41,7 @@ function initializeFormPage() {
   if (form) {
     form.addEventListener('submit', handleFormSubmission);
   }
-}
+}}
 
 /**
  * Toggle partner fields visibility based on solo spot checkbox
@@ -81,9 +84,8 @@ function displaySelectedSpot() {
 
   if (selectedLot && selectedSpot) {
     lotDisplay.textContent = selectedLot;
-    // Extract just the number from spotId if it's formatted as "A-1"
-    const spotNumber = selectedSpot.includes('-') ? selectedSpot.split('-')[1] : selectedSpot;
-    spotDisplay.textContent = spotNumber;
+    // selectedSpot is just a number, no need to split
+    spotDisplay.textContent = selectedSpot;
     optionDisplay.textContent = selectedOption;
   } else {
     // If no spot selected, show warning
@@ -242,3 +244,52 @@ function saveStudentFormData(formData) {
 }
 
 console.log('✓ form.js loaded successfully');
+
+/**
+ * Save current form data temporarily before going back to parking page
+ */
+function changeSpot() {
+  // Collect current form data
+  const tempFormData = {
+    fullName: document.getElementById('fullName').value.trim(),
+    studentId: document.getElementById('studentId').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    partnerName: document.getElementById('partnerName').value.trim(),
+    partnerId: document.getElementById('partnerId').value.trim(),
+    soloSpot: document.getElementById('soloSpotRequest').checked
+  };
+  
+  // Save to temporary storage
+  saveToLocalStorage('tempFormData', tempFormData);
+  
+  // Go back to parking page
+  window.location.href = 'parking.html';
+}
+
+/**
+ * Restore form data if user is returning from parking page
+ */
+function restoreFormData() {
+  const tempFormData = getFromLocalStorage('tempFormData', null);
+  
+  if (tempFormData) {
+    // Restore all form fields
+    document.getElementById('fullName').value = tempFormData.fullName || '';
+    document.getElementById('studentId').value = tempFormData.studentId || '';
+    document.getElementById('email').value = tempFormData.email || '';
+    document.getElementById('partnerName').value = tempFormData.partnerName || '';
+    document.getElementById('partnerId').value = tempFormData.partnerId || '';
+    document.getElementById('soloSpotRequest').checked = tempFormData.soloSpot || false;
+    
+    // Toggle partner fields if solo spot is checked
+    if (tempFormData.soloSpot) {
+      const partnerNameContainer = document.getElementById('partnerName').parentElement;
+      const partnerIdContainer = document.getElementById('partnerId').parentElement;
+      partnerNameContainer.style.display = 'none';
+      partnerIdContainer.style.display = 'none';
+    }
+    
+    // Clear temporary storage after restoration
+    localStorage.removeItem('tempFormData');
+  }
+}

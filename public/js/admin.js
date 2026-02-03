@@ -18,7 +18,7 @@
  */
 
 // Admin password (in production, this should be hashed and server-side)
-const ADMIN_PASSWORD = 'HanksChopped';
+const ADMIN_PASSWORD = 'MHS';
 
 // Session timeout (30 minutes in milliseconds)
 const SESSION_TIMEOUT = 30 * 60 * 1000;
@@ -429,7 +429,7 @@ function populateDataTable(submissions) {
       <td>${escapeHtml(submission.email)}</td>
       <td>${escapeHtml(submission.partnerName || '-')}</td>
       <td>${escapeHtml(submission.partnerId || '-')}</td>
-      <td><strong>${submission.selectedLot || '-'}</strong></td>
+      <td><strong>${getLotName(submission.selectedLot)}</strong></td>
       <td><strong>${submission.selectedSpot || '-'}</strong></td>
       <td>${statusBadge}</td>
       <td>${actionButtons}</td>
@@ -696,6 +696,19 @@ function handleExportData() {
 
   showAlert(`✓ Exported ${submissions.length} records to JSON`, 'success', 2000);
   console.log('✓ Data exported successfully');
+}
+
+/**
+ * Get lot name from lot code
+ * @param {string} lotCode - Lot code (A or B)
+ * @returns {string} - Lot name
+ */
+function getLotName(lotCode) {
+  const lotMap = {
+    'A': 'The Hill',
+    'B': 'The Box'
+  };
+  return lotMap[lotCode] || lotCode;
 }
 
 /**

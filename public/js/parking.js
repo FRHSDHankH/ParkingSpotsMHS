@@ -65,12 +65,12 @@ function initializeParkingPage() {
     });
   });
 
-  // Try to load previous selection, otherwise default to Lot A
+  // Try to load previous selection, otherwise default to Lot B (The Box)
   const previousSelection = getFromLocalStorage('selectedParking', null);
   if (previousSelection) {
     loadSelectedParking();
   } else {
-    switchLot('A');
+    switchLot('B');
   }
 }
 
@@ -124,35 +124,74 @@ function renderParkingLot(lotId) {
  */
 function createParkingSpot(spot) {
   const spotDiv = document.createElement('div');
-  spotDiv.className = `parking-spot ${spot.taken ? 'taken' : 'available'}`;
+  
+  // Check if spot has been requested/taken by any student
+  const submissions = getFromLocalStorage('submissions', []);
+  const spotSubmissions = submissions.filter(s => s.selectedSpot == spot.number);
+  const isSoloTaken = spotSubmissions.some(s => s.soloSpot);
+  const isPartiallyTaken = spotSubmissions.length > 0 && !spotSubmissions.some(s => s.soloSpot);
+  const isTaken = spot.taken || spotSubmissions.length > 0;
+  
+  spotDiv.className = `parking-spot ${isTaken ? 'taken' : 'available'}`;
   spotDiv.dataset.spotId = spot.id;
 
-  spotDiv.innerHTML = `
-    <div class="spot-container">
-      <div class="spot-header">
-        <span class="spot-number">${spot.number}</span>
+  // If spot is partially taken (only one half used), show half layout
+  if (isPartiallyTaken && spotSubmissions.length === 1) {
+    const takenHalf = spotSubmissions[0].selectedOption || 'A';
+    const availableHalf = takenHalf === 'A' ? 'B' : 'A';
+    
+    spotDiv.innerHTML = `
+      <div class="spot-container">
+        <div class="spot-header">
+          <span class="spot-number">${spot.number}</span>
+        </div>
+        <div class="spot-options" style="display: flex; gap: 0; flex: 1;">
+          <div class="spot-half" style="background: linear-gradient(135deg, rgba(231, 76, 60, 0.2) 0%, rgba(231, 76, 60, 0.1) 100%); opacity: 0.7; cursor: not-allowed;">
+            <span style="font-weight: 700; font-size: 0.75rem;">${takenHalf}</span>
+          </div>
+          <div class="spot-half" style="background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(39, 174, 96, 0.05) 100%);">
+            <button class="spot-btn" data-option="${availableHalf}" style="flex: 1; width: 100%; border: none; margin: 0;">${availableHalf}</button>
+          </div>
+        </div>
       </div>
-      <div class="spot-options">
-        <button class="spot-btn btn-option-a" data-option="A" ${spot.taken ? 'disabled' : ''}>
-          A
-        </button>
-        <button class="spot-btn btn-option-b" data-option="B" ${spot.taken ? 'disabled' : ''}>
-          B
-        </button>
-      </div>
-    </div>
-  `;
-  
-  // Add click listeners only if spot is available
-  if (!spot.taken) {
-    const optionBtns = spotDiv.querySelectorAll('.spot-btn');
-    optionBtns.forEach(btn => {
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        const option = this.dataset.option;
-        selectSpot(spot.id, spot, option);
-      });
+    `;
+    
+    // Add click listener for available half
+    const halfBtn = spotDiv.querySelector('.spot-btn');
+    halfBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const option = this.dataset.option;
+      selectSpot(spot.id, spot, option);
     });
+  } else {
+    // Full spot or completely taken
+    spotDiv.innerHTML = `
+      <div class="spot-container">
+        <div class="spot-header">
+          <span class="spot-number">${spot.number}</span>
+        </div>
+        <div class="spot-options">
+          <button class="spot-btn btn-option-a" data-option="A" ${isTaken ? 'disabled' : ''}>
+            A
+          </button>
+          <button class="spot-btn btn-option-b" data-option="B" ${isTaken ? 'disabled' : ''}>
+            B
+          </button>
+        </div>
+      </div>
+    `;
+    
+    // Add click listeners only if spot is available
+    if (!isTaken) {
+      const optionBtns = spotDiv.querySelectorAll('.spot-btn');
+      optionBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const option = this.dataset.option;
+          selectSpot(spot.id, spot, option);
+        });
+      });
+    }
   }
 
   return spotDiv;

@@ -70,9 +70,6 @@ function loadNavbar() {
               <a class="nav-link" href="parking.html">Select Spot</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="form.html">Form</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="admin.html">Admin</a>
             </li>
           </ul>
