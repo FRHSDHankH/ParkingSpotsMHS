@@ -41,7 +41,9 @@
 }
 
 html, body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "otta-pe", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   background-color: var(--light-bg);
   color: var(--text-dark);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -217,8 +219,10 @@ label {
    =========================== */
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: "harvester", sans-serif;
+  font-weight: 900;
+  font-style: normal;
   color: var(--text-dark);
-  font-weight: 700;
   margin-bottom: 1rem;
 }
 

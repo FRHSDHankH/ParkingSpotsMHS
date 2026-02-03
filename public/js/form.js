@@ -41,7 +41,7 @@ function initializeFormPage() {
   if (form) {
     form.addEventListener('submit', handleFormSubmission);
   }
-}}
+}
 
 /**
  * Toggle partner fields visibility based on solo spot checkbox
@@ -77,6 +77,8 @@ function displaySelectedSpot() {
   const selectedSpot = getFromLocalStorage('selectedSpot', null);
   const selectedOption = getFromLocalStorage('selectedOption', 'Solo');
 
+  console.log('📍 Parking Spot Data Retrieved:', { selectedLot, selectedSpot, selectedOption });
+
   // Display in form
   const lotDisplay = document.getElementById('selectedLotDisplay');
   const spotDisplay = document.getElementById('selectedSpotDisplay');
@@ -87,12 +89,14 @@ function displaySelectedSpot() {
     // selectedSpot is just a number, no need to split
     spotDisplay.textContent = selectedSpot;
     optionDisplay.textContent = selectedOption;
+    console.log('✓ Parking spot displayed successfully');
   } else {
     // If no spot selected, show warning
     lotDisplay.textContent = 'No Lot Selected';
     spotDisplay.textContent = 'N/A';
     optionDisplay.textContent = 'N/A';
 
+    console.warn('⚠️ No parking spot data found in localStorage');
     // Show alert
     showAlert('⚠️ No parking spot selected. Please go back and select a spot.', 'warning', 5000);
   }
@@ -116,59 +120,68 @@ function handleFormSubmission(e) {
     return;
   }
 
-  // Validate email ends with @frhsd.com
+  // Get values
+  const fullName = document.getElementById('fullName').value.trim();
   const email = document.getElementById('email').value.trim();
+  const studentId = document.getElementById('studentId').value.trim();
+  const partnerName = document.getElementById('partnerName').value.trim();
+  const partnerId = document.getElementById('partnerId').value.trim();
+
+  // Validate email ends with @frhsd.com
   if (!email.endsWith('@frhsd.com')) {
     showAlert('❌ Email must end with @frhsd.com', 'danger', 3000);
     return;
   }
 
   // Validate student ID is exactly 7 digits
-  const studentId = document.getElementById('studentId').value.trim();
   if (!/^[0-9]{7}$/.test(studentId)) {
     showAlert('❌ Student ID must be exactly 7 digits.', 'danger', 3000);
     return;
   }
 
-  // Collect form data
-  const formData = {
-    fullName: document.getElementById('fullName').value.trim(),
-    studentId: studentId,
-    email: email,
-    soloSpot: soloSpotCheckbox.checked,
-    approvalPending: soloSpotCheckbox.checked,
-    partnerName: soloSpotCheckbox.checked ? '' : document.getElementById('partnerName').value.trim(),
-    partnerId: soloSpotCheckbox.checked ? '' : document.getElementById('partnerId').value.trim(),
-    selectedLot: getFromLocalStorage('selectedLot', null),
-    selectedSpot: getFromLocalStorage('selectedSpot', null),
-    selectedOption: getFromLocalStorage('selectedOption', 'Solo'),
-    submittedAt: new Date().toISOString(),
-    status: 'pending',
-  };
+  // If not solo spot and partner name provided, validate partner ID
+  if (!soloSpotCheckbox.checked && partnerName && partnerId) {
+    if (!/^[0-9]{7}$/.test(partnerId)) {
+      showAlert('❌ Partner ID must be exactly 7 digits if provided.', 'danger', 3000);
+      return;
+    }
+  }
+
+  // Get parking spot data from localStorage
+  const selectedLot = getFromLocalStorage('selectedLot', null);
+  const selectedSpot = getFromLocalStorage('selectedSpot', null);
+  const selectedSpotId = getFromLocalStorage('selectedSpotId', null);
+  const selectedLotId = getFromLocalStorage('selectedLotId', null);
+  const selectedOption = getFromLocalStorage('selectedOption', 'Solo');
 
   // Validate that a parking spot was selected
-  if (!formData.selectedLot || !formData.selectedSpot) {
+  if (!selectedLot || !selectedSpot) {
     showAlert('❌ Please select a parking spot before submitting.', 'danger', 4000);
     return;
   }
 
-  // Validate student and partner IDs (basic format check)
-  if (!isValidStudentId(formData.studentId)) {
-    showAlert('❌ Student ID must be exactly 7 digits.', 'danger', 3000);
-    return;
-  }
+  // Collect form data
+  const formData = {
+    fullName: fullName,
+    studentId: studentId,
+    email: email,
+    soloSpot: soloSpotCheckbox.checked,
+    approvalPending: soloSpotCheckbox.checked,
+    partnerName: soloSpotCheckbox.checked ? '' : partnerName,
+    partnerId: soloSpotCheckbox.checked ? '' : partnerId,
+    selectedLot: selectedLot,
+    selectedSpot: selectedSpot,
+    selectedSpotId: selectedSpotId,
+    selectedLotId: selectedLotId,
+    selectedOption: selectedOption,
+    submittedAt: new Date().toISOString(),
+    status: 'pending',
+  };
 
-  // Validate email ends in @frhsd.com
-  if (!formData.email.endsWith('@frhsd.com')) {
-    showAlert('❌ Email must end in @frhsd.com', 'danger', 3000);
-    return;
-  }
+  console.log('✓ Form data validated and collected:', formData);
 
-  // Validate partner ID only if partner name is provided
-  if (formData.partnerName && !isValidStudentId(formData.partnerId)) {
-    showAlert('❌ Partner ID must be exactly 7 digits.', 'danger', 3000);
-    return;
-  }
+  // Update JSON file to mark spot as taken
+  updateParkingDataJson(formData);
 
   // Save form data to localStorage
   saveStudentFormData(formData);
@@ -267,6 +280,41 @@ function changeSpot() {
 }
 
 /**
+ * Update parking data JSON file to mark spot as taken
+ * @param {object} formData - Form submission data
+ */
+function updateParkingDataJson(formData) {
+  // Note: In a real application, this would make a server request
+  // Since we're client-side only, we'll update localStorage as a proxy
+  // and log what would be sent to the server
+  
+  if (!formData.selectedSpotId || !formData.selectedLotId) {
+    console.warn('⚠️ Cannot update parking data: missing spot or lot ID');
+    return;
+  }
+
+  const updateData = {
+    spotId: formData.selectedSpotId,
+    lotId: formData.selectedLotId,
+    studentName: formData.fullName,
+    studentId: formData.studentId,
+    email: formData.email,
+    partnerName: formData.partnerName || null,
+    partnerId: formData.partnerId || null,
+    reservedDate: new Date().toISOString(),
+    taken: true
+  };
+
+  // Store update request in localStorage (simulating server persistence)
+  let parkingUpdates = getFromLocalStorage('parkingUpdates', []);
+  parkingUpdates.push(updateData);
+  saveToLocalStorage('parkingUpdates', parkingUpdates);
+
+  console.log('✓ Parking spot marked as taken:', updateData);
+  console.log('📤 In production, this would update the JSON file on the server');
+}
+
+/**
  * Restore form data if user is returning from parking page
  */
 function restoreFormData() {
@@ -293,3 +341,26 @@ function restoreFormData() {
     localStorage.removeItem('tempFormData');
   }
 }
+
+/**
+ * Change parking spot - go back to parking page
+ */
+function changeSpot() {
+  // Save form data temporarily
+  const tempFormData = {
+    fullName: document.getElementById('fullName').value,
+    studentId: document.getElementById('studentId').value,
+    email: document.getElementById('email').value,
+    partnerName: document.getElementById('partnerName').value,
+    partnerId: document.getElementById('partnerId').value,
+    soloSpot: document.getElementById('soloSpotRequest').checked,
+  };
+
+  // Save to temporary storage
+  saveToLocalStorage('tempFormData', tempFormData);
+
+  // Go back to parking page
+  window.location.href = 'parking.html';
+}
+
+console.log('✓ form.js loaded successfully');

@@ -227,15 +227,30 @@ function selectSpot(spotId, spotData, option = '') {
   // Show selected spot card with option
   const spotCard = document.getElementById('selectedSpotCard');
   document.getElementById('selectedLot').textContent = parkingData[currentSelectedLot].name;
-  document.getElementById('selectedSpot').textContent = spotData.number;
+  
+  // Get the correct spot number from the data
+  const spotIndexForNumber = parkingData[currentSelectedLot].spots.findIndex(s => s.id === spotId);
+  let spotNumber = spotId;
+  if (spotIndexForNumber !== -1) {
+    spotNumber = parkingData[currentSelectedLot].spots[spotIndexForNumber].number;
+  }
+  
+  document.getElementById('selectedSpot').textContent = spotNumber;
   document.getElementById('selectedOption').textContent = option || 'Solo';
   spotCard.style.display = 'block';
 
   // Save selected spot to localStorage for use in form
   saveToLocalStorage('selectedLot', parkingData[currentSelectedLot].name);
-  saveToLocalStorage('selectedSpot', spotData.number);
+  saveToLocalStorage('selectedSpot', spotNumber);
   saveToLocalStorage('selectedSpotId', spotId);
+  saveToLocalStorage('selectedLotId', currentSelectedLot);
   saveToLocalStorage('selectedOption', option || 'Solo');
+
+  console.log('✓ Parking spot saved to localStorage:', {
+    lot: parkingData[currentSelectedLot].name,
+    spot: spotData.number,
+    option: option || 'Solo'
+  });
 
   // Save selection to LocalStorage
   saveSelectedParking(currentSelectedLot, spotId, option);
