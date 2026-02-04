@@ -35,18 +35,22 @@
             <img src="public/images/MustangsLogo.png" alt="Marlboro Mustangs Logo" style="max-height: 80px;">
           </div>
 
-          <!-- Success Message -->
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <h4 class="alert-heading">Submission Successful!</h4>
-            <p class="mb-0">
-              Your parking spot has been reserved. Please review the details below.
-            </p>
+          <!-- Success Message Card -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0" style="color: #001a4d !important;">Submission Successful!</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-0">
+                Your parking spot has been reserved. Please review the details below.
+              </p>
+            </div>
           </div>
 
           <!-- Confirmation Card -->
           <div class="card mb-4">
             <div class="card-header">
-              <h5 class="mb-0">Assigned Parking Spot</h5>
+              <h5 class="mb-0" style="color: #001a4d !important;">Assigned Parking Spot</h5>
             </div>
             <div class="card-body">
               <div class="row">
@@ -83,7 +87,7 @@
           <!-- Student Info Card -->
           <div class="card mb-4">
             <div class="card-header">
-              <h5 class="mb-0">👤 Your Information</h5>
+              <h5 class="mb-0" style="color: #001a4d !important;"> Your Information</h5>
             </div>
             <div class="card-body">
               <div class="row">
@@ -110,7 +114,7 @@
           <!-- Partner Info Card -->
           <div class="card mb-4">
             <div class="card-header">
-              <h5 class="mb-0">👥 Partner Information</h5>
+              <h5 class="mb-0" style="color: #001a4d !important;"> Partner Information</h5>
             </div>
             <div class="card-body">
               <div class="row">
@@ -127,9 +131,9 @@
           </div>
 
           <!-- Next Steps Card -->
-          <div class="card mb-4 border-success">
-            <div class="card-header bg-success text-white">
-              <h5 class="mb-0">📋 Next Steps</h5>
+          <div class="card mb-4 ">
+            <div class="card-header text-white">
+              <h5 class="mb-0" style="color: #001a4d !important;">Next Steps</h5>
             </div>
             <div class="card-body">
               <ol class="mb-0">
@@ -143,21 +147,25 @@
             </div>
           </div>
 
-          <!-- Important Notes -->
-          <div class="alert alert-info" role="alert">
-            <h5 class="alert-heading">ℹ️ Important</h5>
-            <ul class="mb-0">
-              <li>This spot is valid for the 2026-2027 school year</li>
-              <li>You must have a valid parking permit on your vehicle</li>
-              <li>Parking is subject to all school policies and local regulations</li>
-              <li>Any violations may result in revocation of parking privileges</li>
-            </ul>
+          <!-- Important Notes Card -->
+          <div class="card mb-4 border-warning">
+            <div class="card-header bg-warning">
+              <h5 class="mb-0" style="color: #001a4d !important;">Important</h5>
+            </div>
+            <div class="card-body">
+              <ul class="mb-0">
+                <li>This spot is valid for the 2026-2027 school year</li>
+                <li>You must have a valid parking permit on your vehicle</li>
+                <li>Parking is subject to all school policies and local regulations</li>
+                <li>Any violations may result in revocation of parking privileges</li>
+              </ul>
+            </div>
           </div>
 
           <!-- Action Buttons -->
           <div class="d-grid gap-2 d-sm-flex">
             <button class="btn btn-primary btn-lg" onclick="window.print()">
-              🖨️ Print Confirmation
+              Print Confirmation
             </button>
             <a href="index.html" class="btn btn-outline-secondary btn-lg">
               Back to Home

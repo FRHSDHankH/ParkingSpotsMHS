@@ -38,7 +38,7 @@ function loadAndDisplayConfirmation() {
   if (!formData) {
     // No submission found
     console.warn('No student form data found in LocalStorage');
-    showAlert('⚠️ No submission found. Please complete the form first.', 'warning', 5000);
+    showAlert('No submission found. Please complete the form first.', 'warning', 5000);
     
     // Redirect to form page after delay
     setTimeout(() => {
@@ -56,7 +56,7 @@ function loadAndDisplayConfirmation() {
   // Display partner information
   displayPartnerInfo(formData);
 
-  console.log('✓ Confirmation page loaded with student data');
+  console.log('Confirmation page loaded with student data');
 }
 
 /**
@@ -116,4 +116,4 @@ function displayPartnerInfo(formData) {
   console.log(`Partner: ${formData.partnerName} (${formData.partnerId})`);
 }
 
-console.log('✓ confirmation.js loaded successfully');
+console.log('confirmation.js loaded successfully');

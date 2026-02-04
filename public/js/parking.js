@@ -41,7 +41,7 @@ async function loadParkingData() {
       }
     };
     
-    console.log('✓ Parking data loaded:', { A: parkingData.A.totalSpots, B: parkingData.B.totalSpots, Total: parkingData.A.totalSpots + parkingData.B.totalSpots });
+    console.log('Parking data loaded:', { A: parkingData.A.totalSpots, B: parkingData.B.totalSpots, Total: parkingData.A.totalSpots + parkingData.B.totalSpots });
     initializeParkingPage();
   } catch (error) {
     console.error('Failed to load parking data:', error);
@@ -264,7 +264,7 @@ function selectSpot(spotId, spotData, option = '') {
   saveToLocalStorage('selectedLotId', currentSelectedLot);
   saveToLocalStorage('selectedOption', option || 'Solo');
 
-  console.log('✓ Parking spot saved to localStorage:', {
+  console.log('Parking spot saved to localStorage:', {
     lot: parkingData[currentSelectedLot].name,
     spot: spotData.number,
     option: option || 'Solo'
@@ -294,7 +294,7 @@ function saveSelectedParking(lot, spotId, spotNumber, option = '') {
     timestamp: new Date().toISOString()
   };
   saveToLocalStorage('selectedParking', selectedParking);
-  console.log('✓ Parking selection saved:', selectedParking);
+  console.log('Parking selection saved:', selectedParking);
 }
 
 /**
@@ -303,7 +303,7 @@ function saveSelectedParking(lot, spotId, spotNumber, option = '') {
 function loadSelectedParking() {
   const selectedParking = getFromLocalStorage('selectedParking', null);
   if (selectedParking) {
-    console.log('✓ Loaded previous parking selection:', selectedParking);
+    console.log('Loaded previous parking selection:', selectedParking);
     // Switch to the previously selected lot
     switchLot(selectedParking.lot);
     // Restore the spot selection after a short delay to ensure DOM is ready
@@ -332,4 +332,4 @@ function loadSelectedParking() {
   }
 }
 
-console.log('✓ parking.js loaded successfully');
+console.log('parking.js loaded successfully');

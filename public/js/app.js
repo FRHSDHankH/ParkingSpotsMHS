@@ -188,4 +188,4 @@ function showAlert(message, type = 'info', duration = 3000) {
   }
 }
 
-console.log('✓ Global app.js loaded successfully');
+console.log('Global app.js loaded successfully');

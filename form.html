@@ -86,28 +86,31 @@
                   </div>
                 </div>
 
-                <!-- Partner Name Field -->
-                <div class="mb-3">
-                  <label for="partnerName" class="form-label">Partner Name (Optional)</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="partnerName"
-                    placeholder="Partner Full Name (leave blank for solo spot)"
-                  />
-                  <small class="form-text text-muted">Leave blank if requesting a solo spot</small>
-                </div>
+               
+                <!-- Partner Information (Optional) -->
+                <div id="partnerSection" class="mb-3" style="display: none;">
+                  <h6 class="mb-3">Partner Information (Optional)</h6>
+                  
+                  <div class="mb-3">
+                    <label for="partnerName" class="form-label">Partner Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="partnerName"
+                      placeholder="Jane Smith"
+                    />
+                  </div>
 
-                <!-- Partner ID Field -->
-                <div class="mb-3">
-                  <label for="partnerId" class="form-label">Partner Student ID (7 digits - Optional)</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="partnerId"
-                    placeholder="1234567 (if you have a partner)"
-                    pattern="\d{7}"
-                  />
+                  <div class="mb-3">
+                    <label for="partnerId" class="form-label">Partner Student ID (7 digits)</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="partnerId"
+                      placeholder="7654321"
+                      pattern="\d{7}"
+                    />
+                  </div>
                 </div>
 
                 <!-- Solo Spot Request -->

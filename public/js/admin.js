@@ -81,7 +81,7 @@ function createAdminSession() {
   };
 
   saveToLocalStorage('adminSession', session);
-  console.log('✓ Admin session created');
+  console.log('Admin session created');
 }
 
 /**
@@ -101,18 +101,18 @@ function refreshAdminSession() {
 function setupLoginForm() {
   const loginForm = document.getElementById('loginForm');
   
-  console.log('📋 Setting up login form...');
+  console.log('Setting up login form...');
   console.log('loginForm element:', loginForm);
   
   if (loginForm) {
     loginForm.addEventListener('submit', function (e) {
-      console.log('📝 Form submitted!');
+      console.log('Form submitted!');
       e.preventDefault();
       handleLoginSubmission();
     });
-    console.log('✓ Login form event listener attached');
+    console.log('Login form event listener attached');
   } else {
-    console.error('❌ loginForm element not found!');
+    console.error('loginForm element not found!');
   }
 }
 
@@ -123,12 +123,12 @@ function handleLoginSubmission() {
   const passwordInput = document.getElementById('adminPassword');
   const password = passwordInput.value.trim();
 
-  console.log('🔐 Login attempt started');
+  console.log('Login attempt started');
 
   // Validate password
   if (!password) {
     try {
-      showAlert('❌ Please enter a password', 'danger', 3000);
+      showAlert('Please enter a password', 'danger', 3000);
     } catch (e) {
       alert('Please enter a password');
     }
@@ -137,13 +137,13 @@ function handleLoginSubmission() {
 
   // Check password
   if (password === ADMIN_PASSWORD) {
-    console.log('✓ Password correct, creating session...');
+    console.log('Password correct, creating session...');
     // Create session
     createAdminSession();
     
     // Show success message
     try {
-      showAlert('✓ Login successful!', 'success', 800);
+      showAlert('Login successful!', 'success', 800);
     } catch (e) {
       alert('Login successful!');
     }
@@ -151,9 +151,9 @@ function handleLoginSubmission() {
     console.log('⏳ Calling showAdminDashboard in 300ms...');
     // Hide login screen and show dashboard
     setTimeout(() => {
-      console.log('📊 Attempting to show admin dashboard...');
+      console.log('Attempting to show admin dashboard...');
       showAdminDashboard();
-      console.log('⏲️ Starting session timeout...');
+      console.log('Starting session timeout...');
       startSessionTimeout();
       // Clear password field
       passwordInput.value = '';
@@ -161,7 +161,7 @@ function handleLoginSubmission() {
   } else {
     // Invalid password
     try {
-      showAlert('❌ Invalid password. Please try again.', 'danger', 3000);
+      showAlert('Invalid password. Please try again.', 'danger', 3000);
     } catch (e) {
       alert('Invalid password. Please try again.');
     }
@@ -181,7 +181,7 @@ function logFailedLoginAttempt() {
   failedAttempts += 1;
   saveToLocalStorage('failedLoginAttempts', failedAttempts);
   
-  console.warn(`⚠️ Failed login attempt #${failedAttempts}`);
+  console.warn(`Failed login attempt #${failedAttempts}`);
 }
 
 /**
@@ -197,19 +197,19 @@ function showAdminDashboard() {
 
   if (loginScreen) {
     loginScreen.style.setProperty('display', 'none', 'important');
-    console.log('✓ Set loginScreen display to none');
+    console.log('Set loginScreen display to none');
   } else {
-    console.error('❌ loginScreen element not found!');
+    console.error('loginScreen element not found!');
   }
 
   if (adminDashboard) {
     adminDashboard.style.setProperty('display', 'block', 'important');
-    console.log('✓ Set adminDashboard display to block');
+    console.log('Set adminDashboard display to block');
   } else {
-    console.error('❌ adminDashboard element not found!');
+    console.error('adminDashboard element not found!');
   }
 
-  console.log('✓ Admin dashboard displayed');
+  console.log('Admin dashboard displayed');
 }
 
 /**
@@ -227,7 +227,7 @@ function showLoginScreen() {
     adminDashboard.style.setProperty('display', 'none', 'important');
   }
 
-  console.log('✓ Login screen displayed');
+  console.log('Login screen displayed');
 }
 
 /**
@@ -255,7 +255,7 @@ function handleLogout() {
     removeFromLocalStorage('adminSession');
 
     // Show message
-    showAlert('✓ Logged out successfully', 'info', 1500);
+    showAlert('Logged out successfully', 'info', 1500);
 
     // Redirect after delay
     setTimeout(() => {
@@ -264,7 +264,7 @@ function handleLogout() {
       document.getElementById('tableBody').innerHTML = '';
     }, 1500);
 
-    console.log('✓ Admin logged out');
+    console.log('Admin logged out');
   }
 }
 
@@ -283,8 +283,8 @@ function startSessionTimeout() {
     // Session expired
     removeFromLocalStorage('adminSession');
     showLoginScreen();
-    showAlert('⚠️ Session expired. Please login again.', 'warning', 3000);
-    console.log('✓ Admin session expired');
+    showAlert('Session expired. Please login again.', 'warning', 3000);
+    console.log('Admin session expired');
   }, SESSION_TIMEOUT);
 
   // Reset timeout on any user interaction
@@ -310,7 +310,7 @@ function resetSessionTimeout() {
     window.sessionTimeoutId = setTimeout(() => {
       removeFromLocalStorage('adminSession');
       showLoginScreen();
-      showAlert('⚠️ Session expired due to inactivity. Please login again.', 'warning', 3000);
+      showAlert('Session expired due to inactivity. Please login again.', 'warning', 3000);
     }, SESSION_TIMEOUT);
   }
 }
@@ -406,19 +406,19 @@ function populateDataTable(submissions) {
     if (status === 'pending') {
       actionButtons = `
         <button class="btn btn-sm btn-success" onclick="approveSubmission(${index})">
-          ✅ Approve
+          Approve
         </button>
         <button class="btn btn-sm btn-danger" onclick="rejectSubmission(${index})">
-          ❌ Reject
+          Reject
         </button>
       `;
     } else {
       actionButtons = `
         <button class="btn btn-sm btn-copy" onclick="copyToClipboard(${index})">
-          📋 Copy
+          Copy
         </button>
         <button class="btn btn-sm btn-remove" onclick="removeSpot(${index})">
-          🗑️ Remove
+          Remove
         </button>
       `;
     }
@@ -427,17 +427,15 @@ function populateDataTable(submissions) {
       <td>${escapeHtml(submission.fullName)}</td>
       <td>${escapeHtml(submission.studentId)}</td>
       <td>${escapeHtml(submission.email)}</td>
-      <td>${escapeHtml(submission.partnerName || '-')}</td>
-      <td>${escapeHtml(submission.partnerId || '-')}</td>
       <td><strong>${getLotName(submission.selectedLot)}</strong></td>
-      <td><strong>${submission.selectedLotId || '-'}-${submission.selectedSpot || '-'}</strong></td>
+      <td><strong>${submission.selectedSpot || '-'}</strong></td>
       <td>${statusBadge}</td>
       <td>${actionButtons}</td>
     `;
     tableBody.appendChild(row);
   });
 
-  console.log(`✓ Populated table with ${submissions.length} submissions`);
+  console.log(`Populated table with ${submissions.length} submissions`);
 }
 
 /**
@@ -463,8 +461,8 @@ Submitted: ${formatDateTime(submission.submittedAt)}
 
   // Copy to clipboard
   navigator.clipboard.writeText(copyText).then(() => {
-    showAlert('✓ Data copied to clipboard', 'success', 2000);
-    console.log('✓ Data copied to clipboard');
+    showAlert('Data copied to clipboard', 'success', 2000);
+    console.log('Data copied to clipboard');
   }).catch(() => {
     showAlert('❌ Failed to copy to clipboard', 'danger', 2000);
   });
@@ -506,8 +504,8 @@ function removeSpot(index) {
     // Reload display
     loadAndDisplayAllSubmissions();
 
-    showAlert(`✓ Removed ${submission.fullName}'s reservation`, 'success', 2000);
-    console.log(`✓ Removed submission at index ${originalIndex}`);
+    showAlert(`Removed ${submission.fullName}'s reservation`, 'success', 2000);
+    console.log(`Removed submission at index ${originalIndex}`);
   }
 }
 
@@ -549,8 +547,8 @@ function approveSubmission(index) {
     // Reload display
     loadAndDisplayAllSubmissions();
 
-    showAlert(`✓ Approved ${submission.fullName}'s parking request`, 'success', 2000);
-    console.log(`✓ Approved submission at index ${originalIndex}`);
+    showAlert(`Approved ${submission.fullName}'s parking request`, 'success', 2000);
+    console.log(`Approved submission at index ${originalIndex}`);
   }
 }
 
@@ -590,8 +588,8 @@ function rejectSubmission(index) {
     // Reload display
     loadAndDisplayAllSubmissions();
 
-    showAlert(`✓ Rejected ${submission.fullName}'s parking request`, 'warning', 2000);
-    console.log(`✓ Rejected submission at index ${originalIndex}`);
+    showAlert(`Rejected ${submission.fullName}'s parking request`, 'warning', 2000);
+    console.log(`Rejected submission at index ${originalIndex}`);
   }
 }
 
@@ -622,7 +620,7 @@ function handleSearchSubmissions() {
 
   // Repopulate table with filtered results
   populateDataTable(window.filteredSubmissions);
-  console.log(`✓ Filtered to ${window.filteredSubmissions.length} results`);
+  console.log(`Filtered to ${window.filteredSubmissions.length} results`);
 }
 
 /**
@@ -630,7 +628,7 @@ function handleSearchSubmissions() {
  */
 function handleResetAllData() {
   const confirmed = confirm(
-    '⚠️ WARNING: This will delete ALL student parking reservations. This action cannot be undone. Continue?'
+    'WARNING: This will delete ALL student parking reservations. This action cannot be undone. Continue?'
   );
 
   if (!confirmed) {
@@ -657,7 +655,7 @@ function handleResetAllData() {
   window.filteredSubmissions = [];
   loadAndDisplayAllSubmissions();
 
-  showAlert('✓ All parking data has been reset', 'warning', 3000);
+  showAlert('All parking data has been reset', 'warning', 3000);
   console.log('✓ All parking data reset');
 }
 

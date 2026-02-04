@@ -78,7 +78,7 @@ function displaySelectedSpot() {
   const selectedLotId = getFromLocalStorage('selectedLotId', null);
   const selectedOption = getFromLocalStorage('selectedOption', 'Solo');
 
-  console.log('📍 Parking Spot Data Retrieved:', { selectedLot, selectedSpot, selectedLotId, selectedOption });
+  console.log('Parking Spot Data Retrieved:', { selectedLot, selectedSpot, selectedLotId, selectedOption });
 
   // Display in form
   const lotDisplay = document.getElementById('selectedLotDisplay');
@@ -90,16 +90,16 @@ function displaySelectedSpot() {
     // Display as LOT-SPOTNUMBER for clarity (e.g., B-133)
     spotDisplay.textContent = `${selectedLotId}-${selectedSpot}`;
     optionDisplay.textContent = selectedOption;
-    console.log('✓ Parking spot displayed successfully');
+    console.log('Parking spot displayed successfully');
   } else {
     // If no spot selected, show warning
     lotDisplay.textContent = 'No Lot Selected';
     spotDisplay.textContent = 'N/A';
     optionDisplay.textContent = 'N/A';
 
-    console.warn('⚠️ No parking spot data found in localStorage');
+    console.warn('No parking spot data found in localStorage');
     // Show alert
-    showAlert('⚠️ No parking spot selected. Please go back and select a spot.', 'warning', 5000);
+    showAlert('No parking spot selected. Please go back and select a spot.', 'warning', 5000);
   }
 }
 
@@ -117,7 +117,7 @@ function handleFormSubmission(e) {
   if (!form.checkValidity()) {
     e.stopPropagation();
     form.classList.add('was-validated');
-    showAlert('❌ Please fill in all required fields correctly.', 'danger', 4000);
+    showAlert('Please fill in all required fields correctly.', 'danger', 4000);
     return;
   }
 
@@ -130,20 +130,20 @@ function handleFormSubmission(e) {
 
   // Validate email ends with @frhsd.com
   if (!email.endsWith('@frhsd.com')) {
-    showAlert('❌ Email must end with @frhsd.com', 'danger', 3000);
+    showAlert('Email must end with @frhsd.com', 'danger', 3000);
     return;
   }
 
   // Validate student ID is exactly 7 digits
   if (!/^[0-9]{7}$/.test(studentId)) {
-    showAlert('❌ Student ID must be exactly 7 digits.', 'danger', 3000);
+    showAlert('Student ID must be exactly 7 digits.', 'danger', 3000);
     return;
   }
 
   // If not solo spot and partner name provided, validate partner ID
   if (!soloSpotCheckbox.checked && partnerName && partnerId) {
     if (!/^[0-9]{7}$/.test(partnerId)) {
-      showAlert('❌ Partner ID must be exactly 7 digits if provided.', 'danger', 3000);
+      showAlert('Partner ID must be exactly 7 digits if provided.', 'danger', 3000);
       return;
     }
   }
@@ -157,7 +157,7 @@ function handleFormSubmission(e) {
 
   // Validate that a parking spot was selected
   if (!selectedLot || !selectedSpot) {
-    showAlert('❌ Please select a parking spot before submitting.', 'danger', 4000);
+    showAlert('Please select a parking spot before submitting.', 'danger', 4000);
     return;
   }
 
@@ -179,7 +179,7 @@ function handleFormSubmission(e) {
     status: 'pending',
   };
 
-  console.log('✓ Form data validated and collected:', formData);
+  console.log('Form data validated and collected:', formData);
 
   // Update JSON file to mark spot as taken
   updateParkingDataJson(formData);
@@ -189,9 +189,9 @@ function handleFormSubmission(e) {
 
   // Show success message
   if (soloSpotCheckbox.checked) {
-    showAlert('✓ Form submitted! Your solo spot request is pending admin approval.', 'success', 2000);
+    showAlert('Form submitted! Your solo spot request is pending admin approval.', 'success', 2000);
   } else {
-    showAlert('✓ Form submitted successfully! Redirecting to confirmation...', 'success', 2000);
+    showAlert('Form submitted successfully! Redirecting to confirmation...', 'success', 2000);
   }
 
   // Redirect to confirmation page after brief delay
@@ -246,14 +246,14 @@ function saveStudentFormData(formData) {
 
         // Note: This would require a backend endpoint to save
         // For now, data persists in localStorage
-        console.log('✓ Student form data prepared for JSON storage', data);
+        console.log('Student form data prepared for JSON storage', data);
       })
       .catch(err => console.log('Note: JSON file update requires backend (localStorage used instead)'));
 
-    console.log('✓ Student form data saved to localStorage');
+    console.log('Student form data saved to localStorage');
   } catch (error) {
-    console.error('✗ Error saving form data:', error);
-    showAlert('⚠️ Error saving data. Please try again.', 'warning', 3000);
+    console.error('Error saving form data:', error);
+    showAlert('Error saving data. Please try again.', 'warning', 3000);
   }
 }
 
@@ -290,7 +290,7 @@ function updateParkingDataJson(formData) {
   // and log what would be sent to the server
   
   if (!formData.selectedSpotId || !formData.selectedLotId) {
-    console.warn('⚠️ Cannot update parking data: missing spot or lot ID');
+    console.warn('Cannot update parking data: missing spot or lot ID');
     return;
   }
 
@@ -311,7 +311,7 @@ function updateParkingDataJson(formData) {
   parkingUpdates.push(updateData);
   saveToLocalStorage('parkingUpdates', parkingUpdates);
 
-  console.log('✓ Parking spot marked as taken:', updateData);
+  console.log('Parking spot marked as taken:', updateData);
   console.log('📤 In production, this would update the JSON file on the server');
 }
 
