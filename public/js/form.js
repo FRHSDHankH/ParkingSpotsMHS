@@ -75,19 +75,20 @@ function displaySelectedSpot() {
   // Get selected spot from localStorage (set by parking.js)
   const selectedLot = getFromLocalStorage('selectedLot', null);
   const selectedSpot = getFromLocalStorage('selectedSpot', null);
+  const selectedLotId = getFromLocalStorage('selectedLotId', null);
   const selectedOption = getFromLocalStorage('selectedOption', 'Solo');
 
-  console.log('📍 Parking Spot Data Retrieved:', { selectedLot, selectedSpot, selectedOption });
+  console.log('📍 Parking Spot Data Retrieved:', { selectedLot, selectedSpot, selectedLotId, selectedOption });
 
   // Display in form
   const lotDisplay = document.getElementById('selectedLotDisplay');
   const spotDisplay = document.getElementById('selectedSpotDisplay');
   const optionDisplay = document.getElementById('selectedOptionDisplay');
 
-  if (selectedLot && selectedSpot) {
+  if (selectedLot && selectedSpot && selectedLotId) {
     lotDisplay.textContent = selectedLot;
-    // selectedSpot is just a number, no need to split
-    spotDisplay.textContent = selectedSpot;
+    // Display as LOT-SPOTNUMBER for clarity (e.g., B-133)
+    spotDisplay.textContent = `${selectedLotId}-${selectedSpot}`;
     optionDisplay.textContent = selectedOption;
     console.log('✓ Parking spot displayed successfully');
   } else {

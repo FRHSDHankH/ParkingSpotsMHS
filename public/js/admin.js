@@ -430,7 +430,7 @@ function populateDataTable(submissions) {
       <td>${escapeHtml(submission.partnerName || '-')}</td>
       <td>${escapeHtml(submission.partnerId || '-')}</td>
       <td><strong>${getLotName(submission.selectedLot)}</strong></td>
-      <td><strong>${submission.selectedSpot || '-'}</strong></td>
+      <td><strong>${submission.selectedLotId || '-'}-${submission.selectedSpot || '-'}</strong></td>
       <td>${statusBadge}</td>
       <td>${actionButtons}</td>
     `;

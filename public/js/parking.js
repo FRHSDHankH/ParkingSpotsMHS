@@ -72,6 +72,13 @@ function initializeParkingPage() {
   } else {
     switchLot('B');
   }
+
+  // Auto-refresh parking lot display every 3 seconds to sync with new submissions
+  setInterval(() => {
+    if (currentSelectedLot) {
+      renderParkingLot(currentSelectedLot);
+    }
+  }, 3000);
 }
 
 /**
@@ -127,10 +134,26 @@ function createParkingSpot(spot) {
   
   // Check if spot has been requested/taken by any student
   const submissions = getFromLocalStorage('submissions', []);
-  const spotSubmissions = submissions.filter(s => s.selectedSpot == spot.number);
+  
+  // Log all submissions for debugging
+  console.log(`Checking spot ${spot.id} (lot: ${spot.lot}, number: ${spot.number})`);
+  console.log('All submissions:', submissions);
+  
+  // Filter by both lot AND spot number, and only count pending/approved submissions
+  const spotSubmissions = submissions.filter(s => {
+    const matches = parseInt(s.selectedSpot) === spot.number && 
+                    s.selectedLotId === spot.lot &&
+                    (s.status === 'pending' || s.status === 'approved');
+    console.log(`  Submission check - spot: ${s.selectedSpot} (parsed: ${parseInt(s.selectedSpot)}) vs ${spot.number}, lot: ${s.selectedLotId} vs ${spot.lot}, status: ${s.status} - MATCH: ${matches}`);
+    return matches;
+  });
+  
   const isSoloTaken = spotSubmissions.some(s => s.soloSpot);
   const isPartiallyTaken = spotSubmissions.length > 0 && !spotSubmissions.some(s => s.soloSpot);
   const isTaken = spot.taken || spotSubmissions.length > 0;
+  
+  // Debug logging
+  console.log(`  RESULT for ${spot.id}: isTaken=${isTaken}, spotSubmissions.length=${spotSubmissions.length}, isSolo=${isSoloTaken}, isPartial=${isPartiallyTaken}`);
   
   spotDiv.className = `parking-spot ${isTaken ? 'taken' : 'available'}`;
   spotDiv.dataset.spotId = spot.id;
@@ -212,17 +235,12 @@ function selectSpot(spotId, spotData, option = '') {
     }
   }
 
-  // Apply selection to new spot
+  // Apply selection to new spot (visual highlight only - NOT locked yet)
   currentSelectedSpot = spotId;
   const spotElement = document.querySelector(`[data-spot-id="${spotId}"]`);
   spotElement.classList.add('selected');
-  spotElement.classList.add('taken');
-
-  // Mark spot as taken in parking data
-  const spotIndex = parkingData[currentSelectedLot].spots.findIndex(s => s.id === spotId);
-  if (spotIndex !== -1) {
-    parkingData[currentSelectedLot].spots[spotIndex].taken = true;
-  }
+  // DO NOT add 'taken' class or mark as taken in data here
+  // Spot is only locked after form submission
 
   // Show selected spot card with option
   const spotCard = document.getElementById('selectedSpotCard');
@@ -253,7 +271,7 @@ function selectSpot(spotId, spotData, option = '') {
   });
 
   // Save selection to LocalStorage
-  saveSelectedParking(currentSelectedLot, spotId, option);
+  saveSelectedParking(currentSelectedLot, spotId, spotNumber, option);
 
   // Scroll to selection card
   spotCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -263,18 +281,15 @@ function selectSpot(spotId, spotData, option = '') {
  * Save selected parking spot to LocalStorage
  * @param {string} lot - Parking lot (A or B)
  * @param {string} spotId - Spot ID (e.g., 'A-1')
+ * @param {number} spotNumber - Actual spot number (e.g., 1, 133)
  * @param {string} option - Selection option (A, B, or Solo)
  */
-function saveSelectedParking(lot, spotId, option = '') {
-  // Save individual keys for form access
-  saveToLocalStorage('selectedLot', lot);
-  saveToLocalStorage('selectedSpot', spotId);
-  saveToLocalStorage('selectedOption', option || 'Solo');
-  
-  // Also save combined object for reference
+function saveSelectedParking(lot, spotId, spotNumber, option = '') {
+  // Save combined object for reference (don't overwrite individual values)
   const selectedParking = {
     lot: lot,
     spotId: spotId,
+    spotNumber: spotNumber,
     option: option || 'Solo',
     timestamp: new Date().toISOString()
   };
@@ -304,6 +319,12 @@ function loadSelectedParking() {
         const spot = parkingData[selectedParking.lot].spots.find(s => s.id === selectedParking.spotId);
         if (spot) {
           document.getElementById('selectedSpot').textContent = spot.number;
+          // Restore all localStorage values correctly
+          saveToLocalStorage('selectedLot', parkingData[selectedParking.lot].name);
+          saveToLocalStorage('selectedSpot', spot.number);
+          saveToLocalStorage('selectedSpotId', selectedParking.spotId);
+          saveToLocalStorage('selectedLotId', selectedParking.lot);
+          saveToLocalStorage('selectedOption', selectedParking.option || 'Solo');
         }
         spotCard.style.display = 'block';
       }
