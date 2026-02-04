@@ -209,6 +209,7 @@ function showAdminDashboard() {
     console.error('adminDashboard element not found!');
   }
 
+  document.body.classList.add('admin-logged-in');
   console.log('Admin dashboard displayed');
 }
 
@@ -227,6 +228,7 @@ function showLoginScreen() {
     adminDashboard.style.setProperty('display', 'none', 'important');
   }
 
+  document.body.classList.remove('admin-logged-in');
   console.log('Login screen displayed');
 }
 
@@ -428,7 +430,8 @@ function populateDataTable(submissions) {
       <td>${escapeHtml(submission.studentId)}</td>
       <td>${escapeHtml(submission.email)}</td>
       <td><strong>${getLotName(submission.selectedLot)}</strong></td>
-      <td><strong>${submission.selectedSpot || '-'}</strong></td>
+      <td><strong>${submission.selectedOption ? submission.selectedOption.toUpperCase() : 'solo'}-${submission.selectedSpot || '-'}</strong></td>
+      <td>${submission.soloSpot ? '<span class="badge bg-info">Solo</span>' : '<span class="badge bg-primary">Shared</span>'}</td>
       <td>${statusBadge}</td>
       <td>${actionButtons}</td>
     `;
@@ -560,7 +563,7 @@ function rejectSubmission(index) {
   const submission = window.filteredSubmissions[index];
   
   if (!submission) {
-    showAlert('❌ Error: Submission not found', 'danger', 2000);
+    showAlert(' Error: Submission not found', 'danger', 2000);
     return;
   }
 

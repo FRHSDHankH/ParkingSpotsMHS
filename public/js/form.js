@@ -161,6 +161,25 @@ function handleFormSubmission(e) {
     return;
   }
 
+  // If requesting a solo spot, check if the spot is partially taken
+  if (soloSpotCheckbox.checked) {
+    // Get all submissions to check if spot is half-taken
+    let submissions = getFromLocalStorage('submissions', []);
+    
+    // Check if any submission has this spot with soloSpot = false (shared, meaning only one half is taken)
+    const isSpotPartiallyTaken = submissions.some(s => 
+      parseInt(s.selectedSpot) === parseInt(selectedSpot) && 
+      s.selectedLotId === selectedLotId &&
+      !s.soloSpot &&
+      (s.status === 'pending' || s.status === 'approved')
+    );
+    
+    if (isSpotPartiallyTaken) {
+      showAlert('This spot has already been partially taken by another student. You cannot request a solo spot here.', 'danger', 4000);
+      return;
+    }
+  }
+
   // Collect form data
   const formData = {
     fullName: fullName,

@@ -65,12 +65,12 @@ function initializeParkingPage() {
     });
   });
 
-  // Try to load previous selection, otherwise default to Lot B (The Box)
+  // Try to load previous selection, otherwise default to Lot A (The Hill)
   const previousSelection = getFromLocalStorage('selectedParking', null);
   if (previousSelection) {
     loadSelectedParking();
   } else {
-    switchLot('B');
+    switchLot('A');
   }
 
   // Auto-refresh parking lot display every 3 seconds to sync with new submissions
