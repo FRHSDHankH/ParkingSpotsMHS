@@ -18,7 +18,7 @@
  */
 
 // Admin password (in production, this should be hashed and server-side)
-const ADMIN_PASSWORD = 'MHS';
+const ADMIN_PASSWORD = 'HankIsChopped';
 
 // Session timeout (30 minutes in milliseconds)
 const SESSION_TIMEOUT = 30 * 60 * 1000;
